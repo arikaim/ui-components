@@ -1,7 +1,7 @@
 {
-    "name": "arikaim/ui",
-    "description": "Arikam CMS UI Libraries",
-    "keywords": ["UI", "Arikam UI Libraries","Arikaim"],
+    "name": "arikaim/ui-components",
+    "description": "Arikam CMS UI components",
+    "keywords": ["UI", "Arikam UI components","Arikaim"],
     "type": "arikaim-library",
     "license": "GPL-3.0-or-later",
     "authors": [{
