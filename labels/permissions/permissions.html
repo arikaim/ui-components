@@ -1,0 +1,13 @@
+{% if permissions is empty %}
+    <div class="ui mini basic blue label">{{ labels.none }}</div>
+{% else %}
+    {% for key,item in permissions %}
+    <div class="ui basic fluid blue label">{{ key }}
+        <div class="detail">
+        {% for permission in item %}
+            <span class="text-gray-800 underline">{{ permission }}</span>
+        {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}  

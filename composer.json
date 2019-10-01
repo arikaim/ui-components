@@ -1,0 +1,21 @@
+{
+    "name": "arikaim/ui",
+    "description": "Arikam CMS UI Libraries",
+    "keywords": ["UI", "Arikam UI Libraries","Arikaim"],
+    "type": "arikaim-library",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Konstantin Atanasov",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {
+        "arikaim/installer": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "path": ""
+    }
+}
