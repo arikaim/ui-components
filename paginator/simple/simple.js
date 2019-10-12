@@ -13,4 +13,4 @@ arikaim.events.on('paginator.load.page',function(result) {
     } else {
         arikaim.ui.show('.prev-page');      
     }
-});
+},'simplePaginator');

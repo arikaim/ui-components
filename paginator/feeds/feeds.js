@@ -9,5 +9,7 @@ arikaim.events.on('paginator.load.page',function(result) {
     
     if (result.page == 1) {
         arikaim.ui.hide('.prev-page');
+    } else {
+        arikaim.ui.show('.prev-page');
     }
-});
+},'feedsPaginator');

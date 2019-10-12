@@ -1,0 +1,8 @@
+<div class="page">            
+    <div id="content_wrap" class="pb-40">       
+        {{ content }}
+    </div>
+    {% if footer is not emoty %}
+    {{ component(footer,footer_params) }}   
+    {% endif %}
+</div>

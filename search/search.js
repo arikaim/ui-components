@@ -61,11 +61,13 @@ function Search() {
         if (isEmpty(this.options.component) == true) {
             return false;
         }       
+        var event = getValue('event',this.options,'search.load');
+
         return arikaim.page.loadContent({
             id: self.options.id,
             component: self.options.component
         },function(result) {
-            arikaim.events.emit('search.load',result);
+            arikaim.events.emit(event,result);
             callFunciton(onSuccess,result);
         },onError);
     };

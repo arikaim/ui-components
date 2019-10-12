@@ -21,10 +21,10 @@ function Modal() {
         var deferred = new $.Deferred();
 
         if (isEmpty(parameters.title) == false) {
-            $('#' + element + ' .confirm-dialog-title').html(parameters.title);
+            $('#' + element + ' .modal-title').html(parameters.title);
         }
         if (isEmpty(parameters.description) == false) {
-            $('#' + element + ' .confirm-dialog-description').html(parameters.description);
+            $('#' + element + ' .modal-description').html(parameters.description);
         }
         if (isEmpty(parameters.confirm) == false) {
             $('#confirm_button').html(parameters.confirm);
