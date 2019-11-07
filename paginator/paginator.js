@@ -1,21 +1,19 @@
 /**
- *  Arikaim
- *  @version    1.0  
+ *  Arikaim  
  *  @copyright  Copyright (c) Konstantin Atanasov <info@arikaim.com>
- *  @license    http://www.arikaim.com/license.html
+ *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
- * 
  */
 
 function Paginator() {
     var self = this;    
     this.options = {};
     
-    this.init = function(rows_id, component, namespace) {             
-        component = getDefaultValue(component,$('#' + rows_id).attr('component'));
-        namespace = getDefaultValue(namespace,$('#' + rows_id).attr('namespace'));
+    this.init = function(rowsId, component, namespace) {             
+        component = getDefaultValue(component,$('#' + rowsId).attr('component'));
+        namespace = getDefaultValue(namespace,$('#' + rowsId).attr('namespace'));
    
-        this.setOptions(rows_id,component, namespace);
+        this.setOptions(rowsId,component, namespace);
 
         arikaim.ui.button('.page-link',function(element) {
             var page = $(element).attr('page'); 
@@ -28,8 +26,8 @@ function Paginator() {
        
         $('.page-size-menu').dropdown({
             onChange: function(value) {               
-                self.setPageSize(value,self.getOptions().namespace,function(page_size) {
-                    arikaim.events.emit('paginator.page.size.changed',page_size);
+                self.setPageSize(value,self.getOptions().namespace,function(pageSize) {
+                    arikaim.events.emit('paginator.page.size.changed',pageSize);
                     self.loadRows(self.getOptions());
                 });                           
             }
@@ -41,9 +39,9 @@ function Paginator() {
         $('.page-link').removeClass('active');       
         $('.page-' + page).addClass('active');    
         
-        var from_page = parseInt($('.paginator').attr('from-page'));
-        var to_page = parseInt($('.paginator').attr('to-page'));
-        var last_page = parseInt($('.paginator').attr('last-page'));
+        var fromPage = parseInt($('.paginator').attr('from-page'));
+        var toPage = parseInt($('.paginator').attr('to-page'));
+        var lastPage = parseInt($('.paginator').attr('last-page'));
 
         if (page > 1) {
             $('.first-page').removeClass('disabled');
@@ -53,7 +51,7 @@ function Paginator() {
             $('.first-page').addClass('disabled');
             $('.prev-page').addClass('disabled');
         }     
-        if (page == last_page) {
+        if (page == lastPage) {
             $('.next-page').addClass('disabled');
             $('.last-page').addClass('disabled');
         } else {
@@ -61,17 +59,17 @@ function Paginator() {
             $('.last-page').removeClass('disabled');
         }
 
-        if (isNaN(from_page) == false) {
-            if ((page > to_page) || (page < from_page)) {                       
+        if (isNaN(fromPage) == false) {
+            if ((page > toPage) || (page < fromPage)) {                       
                 this.reload();
             }
         }
     };
 
-    this.setOptions = function(rows_id, component, namespace) {
+    this.setOptions = function(rowsId, component, namespace) {
         namespace = getDefaultValue(namespace,"");
         this.options = { 
-            id: rows_id,           
+            id: rowsId,           
             namespace: namespace       
         };
         if (isString(component) == true) {
@@ -101,12 +99,12 @@ function Paginator() {
         return deferred.promise();
     }
 
-    this.setPageSize = function(page_size, namespace, onSuccess, onError) {
+    this.setPageSize = function(pageSize, namespace, onSuccess, onError) {
         var deferred = new $.Deferred();
 
-        page_size = (isEmpty(page_size) == true) ? 1 : page_size;
+        pageSize = (isEmpty(pageSize) == true) ? 1 : pageSize;
         namespace = getDefaultValue(namespace,"");
-        var data = { page_size: page_size, namespace: namespace };
+        var data = { page_size: pageSize, namespace: namespace };
 
         arikaim.put('/core/api/ui/paginator/page-size',data,function(result) {
             deferred.resolve(result.page_size);  
@@ -129,7 +127,10 @@ function Paginator() {
         page = (isEmpty(page) == true) ? 1 : page;
         namespace = getDefaultValue(namespace,"");
 
-        var data = { page: page, namespace: namespace };
+        var data = { 
+            page: page,
+            namespace: namespace 
+        };
         arikaim.put('/core/api/ui/paginator/page',data,function(result) {
             deferred.resolve(result.page);  
             callFunction(onSuccess,result);      

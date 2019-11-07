@@ -1,7 +1,8 @@
 {
     "buttons": {
         "save": {
-            "content": "Save"
+            "content": "Save",
+            "title": "Save"
         }
     }
 }

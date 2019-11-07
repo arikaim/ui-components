@@ -1,15 +1,13 @@
 /**
  *  Arikaim
- *  @version    1.0  
  *  @copyright  Copyright (c) Konstantin Atanasov <info@arikaim.com>
- *  @license    http://www.arikaim.com/license.html
+ *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
- * 
  */
 
 function CookieModal() { 
     var self = this;
-    this.days = 7;
+    this.days = 12;
 
     this.init = function() {     
         this.days = $('#cookie_policy_modal').attr('interval');

@@ -6,7 +6,6 @@ arikaim.events.on('paginator.load.page',function(result) {
     } else {
         arikaim.ui.show('.prev-page');      
     }
-    
     if (result.page == 1) {
         arikaim.ui.hide('.prev-page');
     } else {

@@ -1,10 +1,8 @@
 /**
  *  Arikaim
- *  @version    1.0  
  *  @copyright  Copyright (c) Konstantin Atanasov <info@arikaim.com>
- *  @license    http://www.arikaim.com/license.html
+ *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
- * 
  */
 
 function Search() {
@@ -13,22 +11,22 @@ function Search() {
 
     this.init = function(options, namespace, onSuccess) {
         this.options = options;
-        var form_id = getValue('form_id',options,"#search_form");
+        var formId = getValue('form_id',options,"#search_form");
         
         $('.search-fields').dropdown({           
             allowAdditions: true
         });   
         $('.search-actions').dropdown();
 
-        arikaim.ui.button(form_id + ' .clear-form',function(element) {
-            arikaim.ui.form.clear(form_id);
+        arikaim.ui.button(formId + ' .clear-form',function(element) {
+            arikaim.ui.form.clear(formId);
             return self.clear(namespace,function(result) {                  
                 self.loadResult();                       
             });           
         });
 
-        arikaim.ui.form.onSubmit(form_id,function() {
-            var items = self.getSearchFields(form_id);
+        arikaim.ui.form.onSubmit(formId,function() {
+            var items = self.getSearchFields(formId);
             var data = { search: items };
             return self.setSearch(data,namespace,function(result) {              
                 self.loadResult();               
@@ -36,13 +34,14 @@ function Search() {
         });
     };
 
-    this.getSearchFields = function(form_id) {
+    this.getSearchFields = function(formId) {
         var items = {};
-        $(form_id).find('.search-field').each(function(index) {
+        $(formId).find('.search-field').each(function(index) {
             var name = $(this).attr('name');
             var value = $(this).val();
             items[name] = value;
         });   
+
         return items;
     };
     
@@ -51,10 +50,10 @@ function Search() {
         return arikaim.delete('/core/api/ui/search/' + namespace,onSuccess,onError);          
     };
 
-    this.setSearch = function(search_data, namespace, onSuccess, onError) {
+    this.setSearch = function(searchData, namespace, onSuccess, onError) {
         namespace = getDefaultValue(namespace,"");  
-        search_data.namespace = namespace;    
-        return arikaim.put('/core/api/ui/search/',search_data,onSuccess,onError);           
+        searchData.namespace = namespace;    
+        return arikaim.put('/core/api/ui/search/',searchData,onSuccess,onError);           
     };
 
     this.loadResult = function(onSuccess, onError) {  

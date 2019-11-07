@@ -1,10 +1,8 @@
 /**
  *  Arikaim
- *  @version    1.0  
  *  @copyright  Copyright (c) Konstantin Atanasov <info@arikaim.com>
- *  @license    http://www.arikaim.com/license.html
+ *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
- * 
 */
 
 function ViewType() {
@@ -25,14 +23,14 @@ function ViewType() {
         return deferred.promise();
     };
 
-    this.setViewType = function(view_type, namespace, onSuccess, onError) {
+    this.setViewType = function(viewType, namespace, onSuccess, onError) {
         var deferred = new $.Deferred();
 
-        view_type = (isEmpty(view_type) == true) ? 'table' : view_type;
+        viewType = (isEmpty(viewType) == true) ? 'table' : viewType;
         namespace = getDefaultValue(namespace,"");
 
         var data = { 
-            view: view_type,
+            view: viewType,
             namespace: namespace  
         };
         arikaim.put('/core/api/ui/paginator/view/type',data,function(result) {

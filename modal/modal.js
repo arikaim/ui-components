@@ -1,10 +1,8 @@
 /**
  *  Arikaim
- *  @version    1.0  
  *  @copyright  Copyright (c) Konstantin Atanasov <info@arikaim.com>
- *  @license    http://www.arikaim.com/license.html
+ *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
- * 
  */
 
 function Modal() { 
@@ -57,7 +55,7 @@ function Modal() {
         return deferred.promise();
     };
 
-    this.confirmDelete = function(parameters,onApprove,onDeny) {
+    this.confirmDelete = function(parameters, onApprove, onDeny) {
         return this.confirm(parameters,onApprove,onDeny,'delete_dialog');
     }
 
@@ -69,5 +67,4 @@ function Modal() {
 }
 
 var modal = new Modal();
-
 modal.init();
