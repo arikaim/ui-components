@@ -67,7 +67,7 @@ function Search() {
             component: self.options.component
         },function(result) {
             arikaim.events.emit(event,result);
-            callFunciton(onSuccess,result);
+            callFunction(onSuccess,result);
         },onError);
     };
 }

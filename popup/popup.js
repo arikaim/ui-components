@@ -15,7 +15,7 @@ function Popup() {
         this.contentId = getDefaultValue(contentId,'popup_content');    
         this.component = component;
         this.params = getDefaultValue(params, null);
-    
+        
         $(selector).popup({
             popup : $('.popup'),
             on: 'click',
@@ -26,7 +26,6 @@ function Popup() {
                     params: params,
                     component: self.component
                 },function(result) {                  
-                    callFunction(onSuccess,result);
                 });
             }
         });
