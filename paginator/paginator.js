@@ -13,7 +13,7 @@ function Paginator() {
         component = getDefaultValue(component,$('#' + rowsId).attr('component'));
         namespace = getDefaultValue(namespace,$('#' + rowsId).attr('namespace'));
    
-        this.setOptions(rowsId,component, namespace);
+        this.setOptions(rowsId,component,namespace);
 
         arikaim.ui.button('.page-link',function(element) {
             var page = $(element).attr('page'); 
@@ -146,6 +146,7 @@ function Paginator() {
         if (isObject(options) == false) {
             return false;
         }
+        
         return arikaim.page.loadContent({
             id: options.id,
             component: options.component,
