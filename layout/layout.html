@@ -1,8 +1,9 @@
+{% set class = class|default('pb-40') %}
 <div class="page">            
-    <div id="content_wrap" class="pb-40">       
+    <div id="content_wrap" class="{{ class }}">       
         {{ content }}
     </div>
-    {% if footer is not emoty %}
-    {{ component(footer,footer_params) }}   
+    {% if footer is not empty %}
+        {{ component(footer,footer_params) }}   
     {% endif %}
 </div>
