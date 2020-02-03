@@ -2,6 +2,7 @@
 {% set charset = head.charset|default('utf-8') %}
 {% set exclude = ['viewport','favicons','og','twitter'] %}
 <head lang="{{ getLanguage() }}">   
+    <meta name="robots" content="index, follow, all" />
     <title>{{ head.title }}</title>
     <meta charset="{{ charset }}">  
     <base href="{{ base_url }}"/>

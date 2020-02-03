@@ -10,10 +10,8 @@ Arikaim CMS Html componets
 
 
 
-#### Install
+#### Installation
 
 ```sh
-
 composer require arikaim/ui-components
-
 ```
