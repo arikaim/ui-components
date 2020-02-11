@@ -14,13 +14,13 @@
     {% endfor %}
     {%- for item in head.og -%}
         <meta property="og:{{ item.name }}" content="{{ item.value }}"/>
-    {% for key, value in item.options %}
-        <meta property="og:{{ item.name }}:{{ key }}" content="{{ value }}"/>
-    {%- endfor -%}
+        {% for key, value in item.options %}
+            <meta property="og:{{ item.name }}:{{ key }}" content="{{ value }}"/>
+        {% endfor -%}
     {%- endfor -%}
     {% for item in head.twitter %}
         <meta name="twitter:{{ item.name }}" content="{{ item.value }}"/>
-    {%- endfor -%}
+    {% endfor -%}
     {%- if favicon.href is defined -%}
         <link rel="icon" type="image/png" href="{{ favicon.href }}">
     {%- endif -%}
@@ -66,7 +66,7 @@
     {% for file in getComponentsFiles()['js'] -%}            
     {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
-        <script src="{{ file.url }}" type="text/javascript" {{- async -}} {{- crossorigin -}}></script>
+        <script src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
     {% endfor -%}
     {% for file in getComponentsFiles()['css'] -%}
         <link rel="stylesheet" type="text/css" href="{{ file.url }}">

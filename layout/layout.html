@@ -1,8 +1,8 @@
-{% set class = class|default('pb-40') %}
-<div class="page">            
-    <div id="content_wrap" class="{{ class }}">       
-        {{ navbar }}
-        {{ content }}
-    </div>
-    {{ footer }}   
+<div class="page-content">
+    <div class="content-inside">
+        <div class="ui sixteen wide grid">          
+            {{ content }}
+        </div>
+    </div>   
 </div>
+{{ footer }}

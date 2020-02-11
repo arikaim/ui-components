@@ -5,39 +5,47 @@
  *  http://www.arikaim.com
  */
 
-function CookieModal() { 
+function CookieDialog() { 
     var self = this;
-    this.days = 12;
+   
+    this.init = function(type, options) {     
+        this.interval = getValue('interval',options,$('#cookie_policy_modal').attr('interval'));
+        var position = getValue('position',options,'bottom right');
 
-    this.init = function() {     
-        this.days = $('#cookie_policy_modal').attr('interval');
-
-        if (this.isApproved() == false) {
+        if (this.isApproved() == true) return;
+    
+        if (type == 'dialog') {
             $('#cookie_policy_modal').modal({           
-                closable: true,
+                closable: true,              
+                blurring: false,
                 onVisible: function() {               
                     self.setApproved();
                 },
                 onHidden: function() {               
                     self.setApproved();
                 }
-            }).modal('show');
-        }       
+            }).modal('show');            
+        } else {
+            $('#cookie_policy_modal').toast({
+                displayTime: 0,
+                position: position,
+                onDeny: function(){
+                    self.setApproved();
+                },
+                onApprove: function() {
+                    self.setApproved();
+                }
+            });
+        }           
     };
 
     this.setApproved = function(interval) {
-        interval = getDefaultValue(interval,this.days);
+        interval = getDefaultValue(interval,this.interval);
         arikaim.storage.setCookie('privacy-policy',1,interval);
     };
 
     this.isApproved = function() {
         var show = arikaim.storage.getCookie('privacy-policy'); 
         return (show == 1 || show == '1') ? true : false;   
-    };
+    };   
 }
-
-var cookieModal = new CookieModal();
-
-$(document).ready(function() {  
-    cookieModal.init();
-});
