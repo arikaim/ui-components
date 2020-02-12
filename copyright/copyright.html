@@ -1,7 +1,7 @@
 {% set current_year = currentYear() %}
 {% set show_label = show_label|default(true) %}
 {% set company = company|default('Your company') %}
-<i class="icon copyright"></i>
+<i class="icon copyright {{ icon_class }}"></i>
 {% if show_label == true %}
 <span class="text-gray-500">{{ label }}</span>
 {% endif %}

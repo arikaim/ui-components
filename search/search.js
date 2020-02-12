@@ -11,15 +11,14 @@ function Search() {
 
     this.init = function(options, namespace, onSuccess) {
         this.options = options;
-        var formId = getValue('form_id',options,"#search_form");
-        
+        var formId = getValue('form_id',options,"#search_form");   
         $('.search-fields').dropdown({           
             allowAdditions: true
         });   
-        $('.search-actions').dropdown();
-
-        arikaim.ui.button(formId + ' .clear-form',function(element) {
+     
+        arikaim.ui.button(' .clear-search-form',function(element) {
             arikaim.ui.form.clear(formId);
+            $(formId).form('clear');
             return self.clear(namespace,function(result) {                  
                 self.loadResult();                       
             });           
@@ -47,12 +46,14 @@ function Search() {
     
     this.clear = function(namespace, onSuccess, onError) {
         namespace = getDefaultValue(namespace,"");
+
         return arikaim.delete('/core/api/ui/search/' + namespace,onSuccess,onError);          
     };
 
     this.setSearch = function(searchData, namespace, onSuccess, onError) {
         namespace = getDefaultValue(namespace,"");  
         searchData.namespace = namespace;    
+
         return arikaim.put('/core/api/ui/search/',searchData,onSuccess,onError);           
     };
 

@@ -5,15 +5,9 @@
         <input placeholder="{{ placeholder }}" class="search-field" type="text" name="search_text" id="search_text" value="{{ search.search_text }}">               
         <div class="ui basic buttons">
             <button class="ui basic button" id="search_button">{{ labels.search }}</button>
-            <div class="ui floating top right pointing dropdown icon button search-actions">
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                    <div class="item clear-form">
-                        <i class="remove icon"></i>
-                        {{ labels.clear }}
-                    </div>                          
-                </div>
-            </div>           
+            <button class="ui icon button clear-search-form" title="{{ labels.clear }}">
+                <i class="remove icon"></i>
+            </button>
         </div>
     </div>
     {{ fields }}

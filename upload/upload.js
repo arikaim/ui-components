@@ -48,7 +48,7 @@ function FileUpload(formId, options) {
                         callFunction(options.onSuccess,response.getResult());
                     },
                     onerror: function(response) {  
-                        arikaim.ui.form.enable(formId);                    
+                        arikaim.ui.form.enable(formId);   
                         var response = new ApiResponse(response);
                         callFunction(options.onError,response.getErrors());
                     },
@@ -66,7 +66,12 @@ function FileUpload(formId, options) {
         });     
 
         arikaim.ui.form.onSubmit(formId,function() {
+            arikaim.ui.form.enable(formId);  
             $(filepondId).filepond('processFiles');
+        },function(result) {
+            arikaim.ui.form.enable(formId);   
+        },function(error) {
+            arikaim.ui.form.enable(formId);   
         });
     };
 

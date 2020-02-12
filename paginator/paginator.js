@@ -154,11 +154,12 @@ function Paginator() {
         });
     };
 
-    this.reload = function(selector) {
+    this.reload = function(selector, component) {
         selector = getDefaultValue(selector,'paginator');
+        component = getDefaultValue(component,'components:paginator');
         return arikaim.page.loadContent({
             id: selector,
-            component: 'components:paginator',
+            component: component,
             params: { namespace: self.options.namespace }
         },function(result) {
             self.init(self.options.id,self.options.component,self.options.namespace)
