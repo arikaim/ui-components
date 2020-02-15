@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function() {
     var slugSource = $('#slug').attr('slug-source');
     var value = $('#' + slugSource).val();

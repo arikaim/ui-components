@@ -4,6 +4,7 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
 */
+"use strict";
 
 function FileUpload(formId, options) {   
     var defaultIdleLabel = "Drag & Drop file or <span class='filepond--label-action'> Browse </span>";
@@ -75,5 +76,5 @@ function FileUpload(formId, options) {
         });
     };
 
-    this.init(formId, options);
+    this.init(formId,options);
 }

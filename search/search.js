@@ -4,6 +4,7 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
+"use strict";
 
 function Search() {
     var self = this;   
@@ -16,7 +17,7 @@ function Search() {
             allowAdditions: true
         });   
      
-        arikaim.ui.button(' .clear-search-form',function(element) {
+        arikaim.ui.button('.clear-search-form',function(element) {
             arikaim.ui.form.clear(formId);
             $(formId).form('clear');
             return self.clear(namespace,function(result) {                  
