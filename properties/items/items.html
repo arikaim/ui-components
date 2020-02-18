@@ -1,0 +1,38 @@
+
+{% for property in items %}  
+    {% if property.group is not empty %}
+        {% set field_name = property.group ~ '[' ~ property.name ~ ']' %}
+    {% else %}
+        {% set field_name = property.name %} 
+    {% endif %}    
+    {% if property['type'] == 7 %}
+        <div class="field {{ property.required|ifthen(true,'required') }}">      
+            <label>{{ property.title }}</label>
+            <div class="ui labeled input">
+                <div class="ui label">http://</div>
+                <input type="text" name="{{ field_name }}" value="{{ property.value }}"> 
+            </div>                
+        </div>
+    {% elseif property['type'] == 3 %}
+        <div class="field {{ property.required|ifthen(true,'required') }}">      
+            <div class="ui checkbox">                                          
+                <input type="checkbox" name="{{ field_name }}" value="true" {{ property.value|ifthen(true,'checked') }}> 
+                <label>{{ property['title'] }}</label>  
+            </div>
+        </div>
+    {% elseif property['type'] == 4 %}
+        <div class="field {{ property.required|ifthen(true,'required') }}">  
+            <label>{{ property.title }}</label>                   
+            <select class="ui dropdown" name="{{ field_name }}">
+                {% for item in property.items %}
+                <option value="{{ item }}" {{ property.value|ifthen(item,'selected') }}>{{ item }}</option>
+                {% endfor %}
+            </select>                
+        </div>
+    {% else %}
+        <div class="field {{ property.required|ifthen(true,'required') }}">      
+            <label>{{ property.title }}</label>                 
+            <input type="text" name="{{ field_name }}" value="{{ property.value }}"> 
+        </div>
+    {% endif %}
+{% endfor %}
