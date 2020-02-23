@@ -1,13 +1,13 @@
 {% set head = head|merge(items) %}
 {% set charset = head.charset|default('utf-8') %}
 {% set exclude = ['viewport','favicons','og','twitter'] %}
-<head lang="{{ getLanguage() }}">   
+<head lang="{{ current_language|default('en') }}">   
     <meta name="robots" content="index, follow, all" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ head.title }}</title>
     <meta charset="{{ charset }}">  
     <base href="{{ base_url }}"/>
-    <meta name="language" content="{{ getLanguage() }}">
+    <meta name="language" content="{{ current_language|default('en') }}">
     {% for key,value in head %}      
     {%- if value is not empty and key not in exclude -%}
         <meta name="{{ key }}" content="{{ value }}"/>
