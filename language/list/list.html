@@ -1,12 +1,16 @@
-{% set items = componentProperties("components:language") %}
 {% set id = id|default('languages_list') %}
-<div class="ui fluid search selection dropdown {{ class }}" id="{{ id }}">    
+{% set class = class|default('fluid search selection') %}
+<div class="ui dropdown {{ class }}" id="{{ id }}">    
     <input name="{{ name }}" type="hidden" value="{{ selected }}">
     <i class="dropdown icon"></i>   
     <div class="default text">{{ label.default }}</div>
     <div class="menu">   
     {% for item in items %}
-        <div class="item" data-value="{{ item.code }}">{{ item.title }}</div>      
+        <div class="item" 
+            data-value="{{ item.code }}" 
+            full-code="{{ item.code_3 }}" 
+            data-title="{{ item.title }}" 
+            native-title="{{ item.native_title }}">{{ item.title }}</div>      
     {% endfor %}
     </div>
 </div>
