@@ -68,4 +68,7 @@ function Modal() {
 }
 
 var modal = new Modal();
-modal.init();
+
+$(document).ready(function() {
+    modal.init();
+});
