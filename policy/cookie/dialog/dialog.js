@@ -4,7 +4,7 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
-"use strict";
+'use strict';
 
 function CookieDialog() { 
     var self = this;
@@ -12,6 +12,10 @@ function CookieDialog() {
     this.init = function(type, options) {     
         this.interval = getValue('interval',options,$('#cookie_policy_modal').attr('interval'));
         var position = getValue('position',options,'bottom right');
+
+        if (isEmpty(this.interval) == true) {
+            this.interval = 7;
+        }
 
         if (this.isApproved() == true) return;
     
@@ -41,7 +45,7 @@ function CookieDialog() {
     };
 
     this.setApproved = function(interval) {
-        interval = getDefaultValue(interval,this.interval);
+        interval = getDefaultValue(interval,this.interval);     
         arikaim.storage.setCookie('privacy-policy',1,interval);
     };
 

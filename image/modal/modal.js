@@ -21,7 +21,8 @@ function ImagePreviewModal() {
         var description = getValue('description',options,null);
         var images = getValue('images',options,[]);
         var icon = getValue('icon',options,null);
-        var hideIcon = getValue('hideIcon',options,null);
+        var hideIcon = getValue('hideIcon',options,false);
+        var hideTitle = getValue('hideTitle',options,true);
 
         images.forEach(function(item) {
             console.log(item);
@@ -36,8 +37,11 @@ function ImagePreviewModal() {
         if (isEmpty(icon) == false) {
             $('#' + modalId + ' .image-modal-icon').attr('class','icon modal-icon ' + icon);           
         }
-        if (isEmpty(hideIcon) == false) {
+        if (hideIcon == true) {
             $('#' + modalId + ' .image-modal-icon').hide();
+        }
+        if (hideTitle == true) {
+            $('#image_modal_header').hide();
         }
         // show modal
         $('#' + modalId).modal({}).modal('show');
