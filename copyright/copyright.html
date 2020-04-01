@@ -11,4 +11,10 @@
 {% endif %}
 {{ current_year }}
 </span>
-<span class="ml-2 {{ text_class }}">{{ company }}</span>
+<span class="ml-2 {{ text_class }}">
+{% if url is not empty %}
+    <a href="{{ url }}">{{ company }}</a>
+{% else %}
+    {{ company }}
+{% endif %}
+</span>
