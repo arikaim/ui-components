@@ -10,6 +10,9 @@
             {{ buttons.cancel.content }}
         </a>    
     {% endif %}
+    {% if show_clear_button == true %}
+        {{ component('components:form.clear',{ form_id: form_id, class: clear_button_class }) }}
+    {% endif %}
     <div class="ui error message errors hidden mt-2"></div> 
     <div class="ui success message hidden mt-2" id="message"></div>  
 </div>
