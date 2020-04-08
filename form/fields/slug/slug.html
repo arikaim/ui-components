@@ -4,7 +4,7 @@
 {% set show_url = (show_url is not defined) ? true : show_url %}
 {% set url_path = url_path|default('') %}
 {% set slug = slug|default('&nbsp;') %}
-<div class="field {{ class }}">
+<div class="field {{ class }}">   
     <label>{{ label }}</label>   
     <div class="ui {{ field_class }}">   
         {% if show_url == true %}         
