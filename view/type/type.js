@@ -4,54 +4,35 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
 */
-"use strict";
+'use strict';
 
 function ViewType() {
     var self = this;
 
-    this.getViewType = function(namespace, onSuccess, onError) {
-        var deferred = new $.Deferred();
-        namespace = getDefaultValue(namespace,"");
+    this.getViewType = function(namespace, onSuccess, onError) {       
+        namespace = getDefaultValue(namespace,'');
 
-        arikaim.get('/core/api/ui/paginator/view/type' + namespace,function(result) {
-            deferred.resolve(result.view);  
-            callFunction(onSuccess,result.view); 
-        },function(error) {
-            deferred.reject(error);
-            callFunction(onError,error);  
-        });
-
-        return deferred.promise();
+        return arikaim.get('/core/api/ui/paginator/view/type' + namespace,onSuccess,onError);           
     };
 
     this.setViewType = function(viewType, namespace, onSuccess, onError) {
-        var deferred = new $.Deferred();
-
         viewType = (isEmpty(viewType) == true) ? 'table' : viewType;
-        namespace = getDefaultValue(namespace,"");
-
+        namespace = getDefaultValue(namespace,'');
         var data = { 
             view: viewType,
             namespace: namespace  
         };
-        arikaim.put('/core/api/ui/paginator/view/type',data,function(result) {
-            deferred.resolve(result.view);  
-            callFunction(onSuccess,result.view);      
-        },function(error) {
-            deferred.reject(error);
-            callFunction(onError,error);  
-        });
 
-        return deferred.promise();
+        return arikaim.put('/core/api/ui/paginator/view/type',data,onSuccess,onError);          
     };
 
-    this.init = function() {
+    this.init = function(onSuccess) {
         var namespace = $('.view-type').attr('namespace');
 
         $('.view-type').dropdown({
             onChange: function(value) {                
                 self.setViewType(value,namespace,function(result) {
-                    arikaim.events.emit('view.type.changed',value); 
+                    callFunction(onSuccess,result.view);                           
                 });             
             }
         });  
@@ -59,7 +40,3 @@ function ViewType() {
 };
 
 var viewType = new ViewType();
-
-$(document).ready(function() {
-    viewType.init();
-});

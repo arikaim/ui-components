@@ -9,7 +9,7 @@
     </span>
     <div class="ui menu">
     {% for item in items %}   
-        <div class="item {{ item|ifthen(selected,'active') }}" data-value="{{ item.value }}">
+        <div class="item {{ item.title|ifthen(selected,'active') }}" data-value="{{ item.value }}">
             <i class="icon {{ item.icon }}"></i>
             {%- if item.title is not empty and show_title == true -%}
             {{ item.title }}
