@@ -33,6 +33,7 @@ function FileUpload(formId, options) {
         var instantUpload = getValue('instantUpload',options,false);
         var url = getValue('url',options,'/api/storage/admin/upload');
         var formFields = getValue('formFields',options,{});         
+        var maxFileSize = getValue('maxFileSize',options,"10MB");        
         var allowMultiple = getValue('allowMultiple',options,false);
         filepondId = getValue('filepondId',options,'#file');
 
@@ -43,10 +44,17 @@ function FileUpload(formId, options) {
             maxFiles: maxFiles,
             allowMultiple: allowMultiple,
             labelIdle: idleLabel,
+            maxFileSize: maxFileSize,
             acceptedFileTypes: acceptedFileTypes,
             instantUpload: instantUpload,
             onremovefile: function(file) {
                $('.errors').hide();
+            },
+            onaddfilestart:  function(file) {
+                callFunction(options.onAddFileStart,file);
+            },
+            onprocessfilestart: function(file) {
+                callFunction(options.onStart,file);
             },
             server: {
                 process: {

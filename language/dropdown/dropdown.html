@@ -21,7 +21,7 @@
         {{ selected.title }}
     {% endif %}
     <div class="ui mini vertical menu">  
-    {% if title != "" %} 
+    {% if title is not empty %} 
         <div class="ui header">{{ title }}</div>
     {% endif %}
     {% for item in items %}
