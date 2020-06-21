@@ -38,11 +38,12 @@ function ProgressBar() {
     this.start = function(options) {
         this.reset();
         this.show();
-        onComplete = getValue('onComplete',options,null);
-        onBeforeComplete = getValue('onBeforeComplete',options,null);
+        if (isObject(options) == true) {
+            onComplete = getValue('onComplete',options,null);
+            onBeforeComplete = getValue('onBeforeComplete',options,null);
+        }
         var interval = getValue('interval',options,defautInterval);
-
-        this.reset();              
+                    
         if (isEmpty(interval) == true) {
             var interval = defautInterval; 
         }
@@ -81,10 +82,14 @@ function ProgressBar() {
     };
 
     this.init = function() {
-        $('.ui.progress').progress({
+        $(selector).progress({
             duration : 200,
             total    : 100
         });
+    };
+
+    this.setLabel = function(label) {
+        $(selector).progress('set label',label);
     };
 }
 
