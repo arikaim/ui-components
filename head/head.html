@@ -42,16 +42,13 @@
     {%- if file.type == "css" -%} 
         <link rel="stylesheet" type="text/css" href="{{ file.file }}">
     {% endif -%}
-    {%- endfor -%}
-    <!-- theme files -->
-    {%- for file in getThemeFiles() -%}
-        <link rel="stylesheet" type="text/css" href="{{ file }}"> 
-    {%- endfor %}      
+    {%- endfor -%}      
     <!-- template files -->
-    {% for file in getTemplateFiles()['js'] -%}
+    {% set template_files = getTemplateFiles() %}
+    {% for file in template_files['js'] -%}
         <script src="{{ file }}" type="text/javascript"></script>
     {% endfor %}
-    {%- for file in getTemplateFiles()['css'] -%}
+    {%- for file in template_files['css'] -%}
         <link rel="stylesheet" type="text/css" href="{{ file }}">      
     {% endfor -%}
     <!-- component files -->
