@@ -2,7 +2,7 @@
     "items": {
         "robots": "index,follow",
         "googlebot": "index,follow",
-        "cache-control": "no-cache",
+        "Cache-Control": "max-age=31536000",
         "content-type": "text/html",
         "viewport": {
             "initial": "1.0",
