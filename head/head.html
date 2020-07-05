@@ -52,12 +52,13 @@
         <link rel="stylesheet" type="text/css" href="{{ file }}">      
     {% endfor -%}
     <!-- component files -->
-    {% for file in getComponentsFiles()['js'] -%}            
+    {% set component_files = getComponentsFiles() %}
+    {% for file in component_files['js'] -%}            
     {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
         <script src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
     {% endfor -%}
-    {% for file in getComponentsFiles()['css'] -%}
+    {% for file in component_files['css'] -%}
         <link rel="stylesheet" type="text/css" href="{{ file.url }}">
     {% endfor -%}
     {%- set pageFiles = getPageFiles() -%}
