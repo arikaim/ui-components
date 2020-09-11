@@ -12,7 +12,8 @@ function Paginator() {
     this.buttons = {};
     this.currentPage = 1;
 
-    this.init = function(rowsId, component, namespace, buttons) {             
+    this.init = function(rowsId, component, namespace, buttons, initButtons) {      
+        initButtons = getDefaultValue(initButtons,true);
         component = getDefaultValue(component,$('#' + rowsId).attr('component'));
         namespace = getDefaultValue(namespace,$('#' + rowsId).attr('namespace'));
         if (isEmpty(buttons) == true) {
@@ -23,7 +24,10 @@ function Paginator() {
             this.buttons = buttons;
         }
         this.setOptions(rowsId,component,namespace);
-        this.initButtons();
+        if (initButtons == true) {
+            this.initButtons();
+        }
+      
 
         $('.page-size-menu').dropdown({
             onChange: function(value) {               
@@ -42,6 +46,7 @@ function Paginator() {
 
     this.initButtons = function(page) {
         page = (isEmpty(page) == true) ? this.currentPage : parseInt(page);
+
         arikaim.ui.button('.page-link',function(element) {
             var page = $(element).attr('page'); 
             return self.setPage(page,self.getOptions().namespace,function(result) {            

@@ -1,4 +1,5 @@
 "use strict";
+
 arikaim.events.on('paginator.load.page',function(result) {    
     $('#current_page').html(result.page);
 
