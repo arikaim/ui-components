@@ -1,19 +1,19 @@
-{% set labels = componentProperties('components:status') %}
-{% set selected = labels.status[status] %}
-{% if skip is empty %}
-    {% set skip = [2] %}
-{% endif %}
-<div class="ui dropdown {{ class }} status-dropdown" uuid="{{ uuid }}">
+{% set selected = items[status] %}
+{% set skip = (skip is empty) ? [2] : skip %}   
+{% set empty_label = empty_label|default(text.status) %}
+{% set class = class|default('status-dropdown') %}
+
+<div class="ui dropdown {{ class }}" uuid="{{ uuid }}">
     <div class="text">
         <span class="ui empty mini label circular {{ selected.class }}"></span>  
-        {{ selected.title }}
+        {{ (selected.title is empty) ? empty_label : selected.title }}
     </div>
     <i class="dropdown icon"></i>   
     <div class="ui menu">
         {% if all == true %}
             <div class="item" data-value="">{{ text.all }}</div>
         {% endif %}
-        {% for label in labels.status %}
+        {% for label in items %}
             {% if label.index not in skip %}          
                 <div class="item {{ label.index|ifthen(selected.index,'active') }}" data-value="{{ label.index }}">  
                     <span class="ui empty mini label circular {{ label.class }}"></span>           
