@@ -46,13 +46,13 @@ function Search() {
     };
     
     this.clear = function(namespace, onSuccess, onError) {
-        namespace = getDefaultValue(namespace,"");
+        namespace = getDefaultValue(namespace,'');
 
         return arikaim.delete('/core/api/ui/search/' + namespace,onSuccess,onError);          
     };
 
     this.setSearch = function(searchData, namespace, onSuccess, onError) {
-        namespace = getDefaultValue(namespace,"");  
+        namespace = getDefaultValue(namespace,'');  
         searchData.namespace = namespace;    
 
         return arikaim.put('/core/api/ui/search/',searchData,onSuccess,onError);           

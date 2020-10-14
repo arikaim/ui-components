@@ -1,6 +1,10 @@
 {% set head = head|merge(items) %}
 {% set charset = head.charset|default('utf-8') %}
 {% set exclude = ['viewport','favicon','og','twitter'] %}
+{% set initial_scale = head.viewport.initial|default("1.0") %}
+{% set minimum_scale =  head.viewport.minimum|default("1.0") %}
+{% set maximum_scale =  head.viewport.maximum|default("1.0") %}
+
 <head lang="{{ current_language|default('en') }}">   
     <meta name="robots" content="index, follow, all" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -8,26 +12,26 @@
     <meta charset="{{ charset }}">  
     <base href="{{ base_url }}"/>
     <meta name="language" content="{{ current_language|default('en') }}">
-    {% for key,value in head -%}      
-        {%- if value is not empty and key not in exclude -%}
-            <meta name="{{ key }}" content="{{ value }}"/>
-        {% endif %}
+    {% for key,value in head %}      
+    {%- if value is not empty and key not in exclude -%}
+        <meta name="{{ key }}" content="{{ value }}"/>
+    {% endif %}
     {% endfor %}
-    {%- for item in head.og -%}
-        <meta property="og:{{ item.name }}" content="{{ item.value }}"/>
-        {% for key, value in item.options %}
-            <meta property="og:{{ item.name }}:{{ key }}" content="{{ value }}"/>
-        {% endfor -%}
+    {%- for item in head.og %}
+    <meta property="og:{{ item.name }}" content="{{ item.value }}"/>
+    {% for key, value in item.options %}
+    <meta property="og:{{ item.name }}:{{ key }}" content="{{ value }}"/>
+    {% endfor -%}
     {%- endfor -%}
-    {% for item in head.twitter %}
-        <meta name="twitter:{{ item.name }}" content="{{ item.value }}"/>
+    {%- for item in head.twitter %}
+    <meta name="twitter:{{ item.name }}" content="{{ item.value }}"/>
     {% endfor -%}
     {%- if head.favicon is defined %}
-        <link rel="icon" type="image/png" href="{{ head.favicon }}">
-    {%- endif -%}    
-        <meta name="viewport" content="width=device-width, initial-scale={{ head.viewport.initial|default("1.0") }}, minimum-scale={{ head.viewport.minimum|default("1.0") }}, maximum-scale={{ head.viewport.maximum|default("1.0") }}"/>
+    <link rel="icon" type="image/png" href="{{ head.favicon }}">
+    {%- endif %}    
+    <meta name="viewport" content="width=device-width,initial-scale={{ initial_scale }}, minimum-scale={{ minimum_scale }}, maximum-scale={{ maximum_scale }}, user-scalable=no"/>
     <!-- library files -->
-    {%- for file in getLibraryFiles() -%}        
+    {% for file in getLibraryFiles() -%}        
     {%- if file.params is iterable -%}
         {%- set params_attributes = '' -%}
         {%- for name,value in file.params -%}
@@ -37,29 +41,29 @@
     {%- endif -%}      
     {%- set async = (file.async == true) ? ' async' : '' -%}  
     {%- if file.type == "js" -%} 
-        <script id="library_{{ file.library }}" type="text/javascript" src="{{ file.file }}" {{- params_attributes|raw -}} {{- async -}} {{- file.crossorigin|attr('crossorigin') -}}></script>
+    <script id="library_{{ file.library }}" type="text/javascript" src="{{ file.file }}" {{- params_attributes|raw -}} {{- async -}} {{- file.crossorigin|attr('crossorigin') -}}></script>
     {% endif %}
     {%- if file.type == "css" -%} 
-        <link rel="stylesheet" type="text/css" href="{{ file.file }}">
+    <link rel="stylesheet" type="text/css" href="{{ file.file }}">
     {% endif -%}
     {%- endfor -%}      
     <!-- template files -->
     {% set template_files = getTemplateFiles() %}
     {% for file in template_files['js'] -%}
-        <script src="{{ file }}" type="text/javascript"></script>
+    <script src="{{ file }}" type="text/javascript"></script>
     {% endfor %}
     {%- for file in template_files['css'] -%}
-        <link rel="stylesheet" type="text/css" href="{{ file }}">      
+    <link rel="stylesheet" type="text/css" href="{{ file }}">      
     {% endfor -%}
     <!-- component files -->
     {% set component_files = getComponentsFiles() %}
-    {% for file in component_files['js'] -%}            
+    {% for file in component_files['js'] %}            
     {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
-        <script src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
+    <script src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
     {% endfor -%}
     {% for file in component_files['css'] -%}
-        <link rel="stylesheet" type="text/css" href="{{ file.url }}">
+    <link rel="stylesheet" type="text/css" href="{{ file.url }}">
     {% endfor -%}
     {%- set pageFiles = getPageFiles() -%}
     {%- if pageFiles is not empty -%}
