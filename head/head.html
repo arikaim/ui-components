@@ -1,9 +1,10 @@
-{% set head = head|merge(items) %}
-{% set charset = head.charset|default('utf-8') %}
-{% set exclude = ['viewport','favicon','og','twitter'] %}
-{% set initial_scale = head.viewport.initial|default("1.0") %}
-{% set minimum_scale =  head.viewport.minimum|default("1.0") %}
-{% set maximum_scale =  head.viewport.maximum|default("1.0") %}
+{%- set charset = charset|default('utf-8') -%}
+{%- set robots = robots|default('index,follow') -%}
+{%- set cache_control = cache_control|default("max-age=31536000") -%}
+{%- set exclude = ['viewport','favicon','og','twitter'] -%}
+{%- set initial_scale = initial_scale|default("1.0") -%}
+{%- set minimum_scale =  minimum_scale|default("1.0") -%}
+{%- set maximum_scale =  maximum_scale|default("1.0") %}
 
 <head lang="{{ current_language|default('en') }}">   
     <meta name="robots" content="index, follow, all" />
@@ -12,6 +13,9 @@
     <meta charset="{{ charset }}">  
     <base href="{{ base_url }}"/>
     <meta name="language" content="{{ current_language|default('en') }}">
+    <meta name="robots" content="{{ robots }}"/>
+    <meta name="googlebot" content="{{ robots }}"/>
+    <meta name="Cache-Control" content="{{ cache_control }}"/>
     {% for key,value in head %}      
     {%- if value is not empty and key not in exclude -%}
         <meta name="{{ key }}" content="{{ value }}"/>
@@ -31,7 +35,7 @@
     {%- endif %}    
     <meta name="viewport" content="width=device-width,initial-scale={{ initial_scale }}, minimum-scale={{ minimum_scale }}, maximum-scale={{ maximum_scale }}, user-scalable=no"/>
     <!-- library files -->
-    {% for file in getLibraryFiles() -%}        
+    {% for file in library_files -%}        
     {%- if file.params is iterable -%}
         {%- set params_attributes = '' -%}
         {%- for name,value in file.params -%}
@@ -48,15 +52,13 @@
     {% endif -%}
     {%- endfor -%}      
     <!-- template files -->
-    {% set template_files = getTemplateFiles() %}
     {% for file in template_files['js'] -%}
     <script src="{{ file }}" type="text/javascript"></script>
     {% endfor %}
     {%- for file in template_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file }}">      
     {% endfor -%}
-    <!-- component files -->
-    {% set component_files = getComponentsFiles() %}
+    <!-- component files --> 
     {% for file in component_files['js'] %}            
     {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
@@ -65,13 +67,12 @@
     {% for file in component_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file.url }}">
     {% endfor -%}
-    {%- set pageFiles = getPageFiles() -%}
-    {%- if pageFiles is not empty -%}
+    {%- if page_files is not empty -%}
         <!-- page files -->
-        {% for file in pageFiles['js'] -%}        
+        {% for file in page_files['js'] -%}        
             <script src="{{ file.url }}" type="text/javascript"></script>
         {%- endfor -%}
-        {%- for file in pageFiles['css'] %}
+        {%- for file in page_files['css'] %}
             <link rel="stylesheet" type="text/css" href="{{ file.url }}">      
         {%- endfor %}  
     {%- endif -%} 
