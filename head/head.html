@@ -1,18 +1,19 @@
-{%- set charset = charset|default('utf-8') -%}
-{%- set robots = robots|default('index,follow') -%}
-{%- set cache_control = cache_control|default("max-age=31536000") -%}
+{%- set charset = head.charset|default('utf-8') -%}
+{%- set robots = head.robots|default('index,follow') -%}
+{%- set cache_control = head.cache_control|default("max-age=31536000") -%}
+{%- set initial_scale = head.initial_scale|default("1.0") -%}
+{%- set minimum_scale = head.minimum_scale|default("1.0") -%}
+{%- set maximum_scale = head.maximum_scale|default("1.0") -%}
+{%- set language = current_language|default('en') %}
 {%- set exclude = ['viewport','favicon','og','twitter'] -%}
-{%- set initial_scale = initial_scale|default("1.0") -%}
-{%- set minimum_scale =  minimum_scale|default("1.0") -%}
-{%- set maximum_scale =  maximum_scale|default("1.0") %}
 
-<head lang="{{ current_language|default('en') }}">   
+<head lang="{{ language }}">   
     <meta name="robots" content="index, follow, all" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ head.title }}</title>
     <meta charset="{{ charset }}">  
     <base href="{{ base_url }}"/>
-    <meta name="language" content="{{ current_language|default('en') }}">
+    <meta name="language" content="{{ language }}">
     <meta name="robots" content="{{ robots }}"/>
     <meta name="googlebot" content="{{ robots }}"/>
     <meta name="Cache-Control" content="{{ cache_control }}"/>
@@ -30,7 +31,7 @@
     {%- for item in head.twitter %}
     <meta name="twitter:{{ item.name }}" content="{{ item.value }}"/>
     {% endfor -%}
-    {%- if head.favicon is defined %}
+    {%- if head.favicon is defined -%}
     <link rel="icon" type="image/png" href="{{ head.favicon }}">
     {%- endif %}    
     <meta name="viewport" content="width=device-width,initial-scale={{ initial_scale }}, minimum-scale={{ minimum_scale }}, maximum-scale={{ maximum_scale }}, user-scalable=no"/>
@@ -67,14 +68,12 @@
     {% for file in component_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file.url }}">
     {% endfor -%}
-    {%- if page_files is not empty -%}
-        <!-- page files -->
-        {% for file in page_files['js'] -%}        
-            <script src="{{ file.url }}" type="text/javascript"></script>
-        {%- endfor -%}
-        {%- for file in page_files['css'] %}
-            <link rel="stylesheet" type="text/css" href="{{ file.url }}">      
-        {%- endfor %}  
-    {%- endif -%} 
-    {{ content }}
+    <!-- page files -->
+    {% for file in page_files['js'] -%}        
+        <script src="{{ file.url }}" type="text/javascript"></script>
+    {%- endfor -%}
+    {%- for file in page_files['css'] %}
+        <link rel="stylesheet" type="text/css" href="{{ file.url }}">      
+    {%- endfor -%}     
+    {{- content -}}
 </head>
