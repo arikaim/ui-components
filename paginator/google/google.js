@@ -6,11 +6,11 @@
  */
 'use strict';
 
-function Paginator() {
+function GoogleApiPaginator() {
     var self = this;    
     this.options = {};
     this.buttons = {};
-    this.currentPage = 1;
+    this.pageToken = null;
 
     this.init = function(rowsId, component, namespace, buttons, initButtons) {      
         initButtons = getDefaultValue(initButtons,true);
@@ -43,46 +43,17 @@ function Paginator() {
         });
     };
 
-    this.initButtons = function(page) {
-        page = (isEmpty(page) == true) ? this.currentPage : parseInt(page);
+    this.initButtons = function(pageToken) {
+        pageToken = (isEmpty(pageToken) == true) ? this.pageToken : pageToken;
 
         arikaim.ui.button('.page-link',function(element) {
-            var page = $(element).attr('page'); 
-            return self.setPage(page,self.getOptions().namespace,function(result) {            
+            var pageToken = $(element).attr('page-token'); 
+            return self.setPage(pageToken,self.getOptions().namespace,function(result) {            
                 arikaim.events.emit('paginator.load.page',result);
                 self.initButtons();                                
                 self.loadRows();  
             }); 
         });
-
-        $('.page-link').removeClass('active');       
-        $('.page-' + page).addClass('active');    
-        
-        var fromPage = parseInt($('.paginator').attr('from-page'));
-        var toPage = parseInt($('.paginator').attr('to-page'));
-        var lastPage = parseInt($('.paginator').attr('last-page'));
-
-        if (page > 1) {
-            $('.first-page').removeClass('disabled');
-            $('.prev-page').removeClass('disabled');
-        }
-        if (page == 1) {
-            $('.first-page').addClass('disabled');
-            $('.prev-page').addClass('disabled');
-        }     
-        if (page == lastPage) {
-            $('.next-page').addClass('disabled');
-            $('.last-page').addClass('disabled');
-        } else {
-            $('.next-page').removeClass('disabled');
-            $('.last-page').removeClass('disabled');
-        }
-
-        if (isNaN(fromPage) == false) {
-            if ((page > toPage) || (page < fromPage)) {                       
-                this.reload();
-            }
-        }
     };
 
     this.setParams = function(params) {
@@ -143,18 +114,16 @@ function Paginator() {
         return arikaim.delete('/core/api/ui/paginator/' + namespace,onSuccess,onError);
     };
 
-    this.setPage = function(page, namespace, onSuccess, onError) {
-        var deferred = new $.Deferred();
-
-        page = (isEmpty(page) == true) ? 1 : page;
-        namespace = getDefaultValue(namespace,"");
+    this.setPage = function(pageToken, namespace, onSuccess, onError) {
+        var deferred = new $.Deferred();    
+        namespace = getDefaultValue(namespace,'');
 
         var data = { 
-            page: page,
+            page: pageToken,
             namespace: namespace 
         };
         arikaim.put('/core/api/ui/paginator/page',data,function(result) {
-            self.currentPage = result.page;
+            self.pageToken = result.page;
             deferred.resolve(result.page);  
             callFunction(onSuccess,result);      
         },function(error) {
@@ -190,6 +159,6 @@ function Paginator() {
     }
 }
 
-if (isEmpty(paginator) == true) {
-    var paginator = new Paginator();
+if (isEmpty(googleApiPaginator) == true) {
+    var googleApiPaginator = new GoogleApiPaginator();
 }

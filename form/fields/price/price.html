@@ -6,8 +6,8 @@
 <div class="field {{ class }}">
     <label>{{ label }}</label>
     <div class="ui right labeled left icon action input">
-        <i class="icon {{ icon }}"></i>
-        <input type="text" placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
+        <i class="icon currency-icon {{ icon }}"></i>
+        <input {{ rule|attr('rule') }} type="text" placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
         <div class="ui icon basic button clear-price" price-field="{{ id }}">
             <i class="icon eraser"></i>
         </div>

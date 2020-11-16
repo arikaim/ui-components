@@ -50,7 +50,7 @@ function FileUpload(formId, options) {
             onremovefile: function(file) {
                $('.errors').hide();
             },
-            onaddfilestart:  function(file) {
+            onaddfilestart: function(file) {
                 callFunction(options.onAddFileStart,file);
             },
             onprocessfilestart: function(file) {
@@ -83,7 +83,7 @@ function FileUpload(formId, options) {
             }
         });     
 
-        arikaim.ui.form.onSubmit(formId,function() {
+        arikaim.ui.form.onSubmit(formId,function() {           
             arikaim.ui.form.enable(formId);  
             $(filepondId).filepond('processFiles');
         },function(result) {

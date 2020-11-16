@@ -8,7 +8,8 @@
 
 function CookieDialog() { 
     var self = this;
-   
+    this.interval = null;
+
     this.init = function(type, options) {     
         this.interval = getValue('interval',options,$('#cookie_policy_modal').attr('interval'));
         var position = getValue('position',options,'bottom right');

@@ -63,10 +63,12 @@ function Search() {
             return false;
         }       
         var event = getValue('event',this.options,'search.load');
+        var params = getValue('params',this.options,null);
 
         return arikaim.page.loadContent({
             id: self.options.id,
-            component: self.options.component
+            component: self.options.component,
+            params: params
         },function(result) {
             arikaim.events.emit(event,result);
             callFunction(onSuccess,result);

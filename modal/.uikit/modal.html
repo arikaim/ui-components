@@ -1,0 +1,20 @@
+<div id="confirm_dialog" class="uk-flex-top" uk-modal>
+    <div class="uk-modal-dialog uk-margin-auto-vertical">
+        <div class="uk-modal-header">            
+            <h5 class="uk-modal-title modal-title" id="modal_title">
+                {{ dialogs.confirm.title }}
+            </h5>
+        </div>
+        <div class="uk-modal-body modal-description" id="confirm_dialog_content">
+            {{ dialogs.confirm.description }}
+        </div>
+        <div class="uk-modal-footer">
+            <button class="uk-button uk-button-default uk-modal-close" type="button" id="cancel_button">
+                {{ buttons.cancel.content }}
+            </button>
+            <button class="uk-button uk-button-primary uk-align-right" type="button" id="confirm_button">
+                {{ buttons.confirm.content }}
+            </button>            
+        </div>
+    </div>
+</div>

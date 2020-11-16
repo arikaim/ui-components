@@ -5,10 +5,10 @@ $(document).ready(function() {
     $('#slug').html(arikaim.text.createSlug(value));  
 
     $('#' + slugSource).keyup(function() {
-        var slug = arikaim.text.createSlug($(this).val());
-        if (slug.trim() == '') {
-            slug = '&nbsp;';
-        }
+        var text = $(this).val();   
+        var slug = arikaim.text.createSlug(text);
+        slug = (slug.trim() == '') ? '&nbsp;' : slug;
+            
         $('#slug').html(slug);      
     });
 });
