@@ -10,13 +10,14 @@
 function ProgressBar() {
     var self = this;
 
-    var selector = "#progress";   
-    var doIncrement = null;
-    var defautInterval = 20;    
+    var selector = "#progress";       
+    var defautInterval = 1000;    
     var onComplete = null;
     var onBeforeComplete = null;
     var progressValue = 95;
     var onError = null;
+
+    this.doIncrement = null;
 
     this.hide = function(placeholder) {
         this.reset();
@@ -47,11 +48,13 @@ function ProgressBar() {
         if (isEmpty(interval) == true) {
             var interval = defautInterval; 
         }
-        doIncrement = setInterval(this.increment,interval);
+        
+        this.doIncrement = setInterval(this.increment,interval);
     };
 
     this.increment = function() {
         var val = $(selector).progress('get value');
+
         if (isFunction(onBeforeComplete) == true) {
             if (val >= progressValue) {
                 var result = onBeforeComplete();
@@ -60,7 +63,7 @@ function ProgressBar() {
                 }
                 if (result === false) {
                     // show error
-                    clearInterval(doIncrement);
+                    clearInterval(this.doIncrement);
                     callFunction(onError);                    
                     return;
                 }
@@ -71,13 +74,13 @@ function ProgressBar() {
         var isComplete = $(selector).progress('is complete');
        
         if (isComplete == true) { 
-            clearInterval(doIncrement);
+            clearInterval(this.doIncrement);
             callFunction(onComplete);               
         }
     };
 
     this.reset = function() {
-        clearInterval(doIncrement);
+        clearInterval(this.doIncrement);
         $(selector).progress('reset');
     };
 
