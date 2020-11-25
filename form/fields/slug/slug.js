@@ -1,14 +1,20 @@
-"use strict";
+'use strict';
+
 $(document).ready(function() {
-    var slugSource = $('#slug').attr('slug-source');
+    var slugSource = $('#slug').attr('slug-source');  
+    var editable = $('#slug').attr('editable');
     var value = $('#' + slugSource).val();
     $('#slug').html(arikaim.text.createSlug(value));  
-
+    
     $('#' + slugSource).keyup(function() {
         var text = $(this).val();   
         var slug = arikaim.text.createSlug(text);
-        slug = (slug.trim() == '') ? '&nbsp;' : slug;
-            
-        $('#slug').html(slug);      
+        slug = slug.trim();
+        if (editable == '1') {
+            $('#slug').val(slug); 
+        } else {
+            slug = (slug == '') ? '&nbsp;' : slug;            
+            $('#slug').html(slug);    
+        }
     });
 });

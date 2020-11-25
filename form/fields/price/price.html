@@ -6,7 +6,11 @@
 <div class="field {{ class }}">
     <label>{{ label }}</label>
     <div class="ui right labeled left icon action input">
-        <i class="icon currency-icon {{ icon }}"></i>
+        {% if icon is not empty %}
+            <i class="icon currency-icon {{ icon }}"></i>
+        {% else %}
+            <div class="ui label">{{ currency_code }}</div>
+        {% endif %}      
         <input {{ rule|attr('rule') }} type="text" placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
         <div class="ui icon basic button clear-price" price-field="{{ id }}">
             <i class="icon eraser"></i>
