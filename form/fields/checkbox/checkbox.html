@@ -1,12 +1,12 @@
 {% set label = label|default(name) %}
 {% set id = id|default(name) %}
-<div class="field {{ class }}">
+<div class="field {{ class }}">  
     {% if field_label is not empty %}
     <label>{{ field_label }}</label>
     {% endif %}
     <div class="ui checkbox checkbox-field {{ field_class }}">
         <input type="checkbox" {{ value|ifthen(1,'checked') }} data-field-id="{{ id }}">
-        <input type="hidden" name="{{ name }}" value="{{ (value is empty) ? 0 : 1 }}" id="{{ id }}">
+        <input type="hidden" name="{{ name }}" value="{{ (value is empty) ? '0' : '1' }}" id="{{ id }}">
         <label class="{{ label_class }}">{{ label }}</label>                           
     </div>  
 </div>

@@ -74,6 +74,7 @@ function Breadcrumb() {
     };
 
     this.setCurrentPath = function(path) {
+        path = (isEmpty(path) == true) ? '' : path;
         this.items = path.split(this.separator);
         $(this.selector).attr('current-path',path);
     };
