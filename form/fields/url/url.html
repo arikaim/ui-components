@@ -1,0 +1,19 @@
+{% set name = name|default('url') %}
+{% set id = id|default(name) %}
+{% set label = label|default(url.label) %}
+{% set placeholder = placeholder|default(url.placeholder) %}
+{% set value = value|default('') %}
+{% set relative = relative|default(true) %}
+
+<div class="field {{ class }}">
+    <label>{{ label }}</label>
+    <div class="ui right labeled action input {{ class }}">
+        {% if relative == true %}          
+            <div class="ui label">{{ url('',true) }}</div>
+        {% endif %}      
+        <input {{ rule|attr('rule') }} type="text" placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
+        <div class="ui icon basic button clear-url" url-field="{{ id }}">
+            <i class="icon eraser"></i>
+        </div>
+    </div>
+</div>
