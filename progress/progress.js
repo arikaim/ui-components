@@ -7,7 +7,8 @@
 'use strict';
 
 function TaskProgress() {
-    
+    var self = this;
+
     this.post = function(url, data, onProgress, onSuccess, onError) {
         return this.request('POST',url,data,onProgress,onSuccess,onError);    
     };
@@ -22,13 +23,12 @@ function TaskProgress() {
 
     this.request = function(method, url, data, onProgress, onSuccess, onError) {
 
-        var handleProgress = (isEmpty(onProgress) == false) ? this.getHandleProgress(onProgress,onError) : null
-        var handleSuccess = (isEmpty(onSuccess) == false) ? this.getHandleSuccess(onSuccess) : null
+        var handleProgress = (isEmpty(onProgress) == false) ? this.getHandleProgress(onProgress,onSuccess,onError) : null
+        var handleSuccess = (isEmpty(onSuccess) == false) ? this.getHandleSuccess(onSuccess,onError) : null
 
         switch (method) {
-            case "GET": {              
+            case "GET":              
                 return arikaim.get(url,handleSuccess,onError,data,null,handleProgress);
-            }
             case 'POST': 
                 return arikaim.post(url,data,handleSuccess,onError,null,handleProgress);
             case 'PUT': 
@@ -38,43 +38,65 @@ function TaskProgress() {
         return false;
     };
 
-    this.getHandleSuccess = function(onSuccess) { 
+    this.getHandleSuccess = function(onSuccess, onError) { 
          
-        return function(result) {            
+        return function(result) {    
             if (isJSON(result) == true) {
-                var dataItems = JSON.parse(result);                     
-                var lastItem = dataItems[dataItems.length - 1];            
-                var response = new ApiResponse(lastItem);  
-                callFunction(onSuccess,response.getResult())
-            } else {
-                callFunction(onSuccess,result);
+                if (self.isProgressResponse(result) == false) {
+                    callFunction(onSuccess,result);
+                } else {
+                    var dataItems = JSON.parse(result);                     
+                    var lastItem = dataItems[dataItems.length - 1];            
+                    var response = new ApiResponse(lastItem);  
+                    if (response.hasError() == false) {
+                        callFunction(onSuccess,response.getResult())
+                    } else {
+                        callFunction(onError,result.getErrors());
+                    }    
+                }                         
             }
         };                                                                                
     };
 
-    this.getHandleProgress = function(onProgress,onError) { 
+    this.getHandleProgress = function(onProgress, onSuccess, onError) { 
          
         return function(event) {
             var data = event.currentTarget.responseText; 
             if (isEmpty(data) == true) {
                 return;
             }
-            data = data.trim() + ']';
-         
+            data = data.trim();            
+            if (data.charAt(data.length - 1) != ']') {
+                data = data + ']';
+            }
+    
             if (isJSON(data) == true) {
                 var dataItems = JSON.parse(data);                     
                 var lastItem = dataItems[dataItems.length - 1];
             
                 var response = new ApiResponse(lastItem);  
-               
-                if (response.hasError() == true) {                                             
+                if (response.hasError() == true) {                                                 
                     callFunction(onError,response.getErrors());                        
-                } else {
-                    callFunction(onProgress,response.getResult());        
+                } else {                   
+                    var result = response.getResult();
+                    if (result.progress_end == true) {
+                        callFunction(onSuccess,result);       
+                    } else {
+                        callFunction(onProgress,result);       
+                    }
+                   
                 }     
             }         
         };                                                                                       
     }; 
+
+    this.isProgressResponse = function(apiResult) {      
+        if (isObject(apiResult) == false) {
+            return false;
+        }
+
+        return (apiResult.progress == true || apiResult.progress == 'true'); 
+    }
 }
 
 var taskProgress = new TaskProgress();
