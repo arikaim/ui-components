@@ -4,20 +4,20 @@
     {% else %}
         {% set field_name = property.name %} 
     {% endif %}    
-    {% set rule = (property.required == true) ? 'rule="empty"' : '' %}    
+    {% set rule = (property.required == true) ? 'empty' : '' %}    
     {% if property['type'] == 7 %}
         <div class="field {{ property.required|ifthen(true,'required') }}">      
             <label>{{ property.title }}</label>
             <div class="ui labeled input">
                 <div class="ui label">http://</div>
-                <input {{ rule }} type="text" name="{{ field_name }}" value="{{ property.value }}"> 
+                <input {{ rule|attr('rule') }} type="text" name="{{ field_name }}" value="{{ property.value }}"> 
             </div>                
         </div>
     {% elseif property['type'] == 3 %}  
         {{  component('components:form.fields.checkbox',{
                 label: property.title,
                 class: property.required|ifthen(true,'required'),
-                name: field_name,
+                name: field_name,                
                 value: property.value
             }) 
         }}          
@@ -34,14 +34,14 @@
         {{  component('components:form.fields.password',{
                 label: property.title,
                 class: property.required|ifthen(true,'required'),
-                name: field_name,
+                name: field_name,                
                 value: property.value
             }) 
         }}       
     {% else %}
         <div class="field {{ property.required|ifthen(true,'required') }}">      
             <label>{{ property.title }}</label>                 
-            <input {{ rule }} type="text" name="{{ field_name }}" value="{{ property.value }}"> 
+            <input {{ rule|attr('rule') }} type="text" name="{{ field_name }}" value="{{ property.value }}"> 
         </div>
     {% endif %}
 {% endfor %}
