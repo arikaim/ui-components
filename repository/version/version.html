@@ -7,9 +7,13 @@
 {{ url }}
 {% set version = service('cache').fetch('repository.' ~ package ~ '.version') %}
 {% if version is empty %}
-    {% set data = fetch(url)|jsonDecode %}
-    {% set version = data['tag_name'] %}
+    {% set data = fetch(url)|jsonDecode %}   
     {% set saved = service('cache').save('repository.' ~ package ~ '.version',version,10) %}
+{% endif %}
+{% if type == 'github' %}
+    {% set version = data['tag_name'] %}
+{% elseif type == 'arikaim' %}
+    {% set version = data['version'] %}
 {% endif %}
 <span {{ class|attr('class') }} id="version_value">
     {{ version }}
