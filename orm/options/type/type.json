@@ -6,6 +6,7 @@
         "type": "Type",
         "description": "Description",
         "default": "Default",
+        "items": "Items",
         "key": "Key"
     }
 }

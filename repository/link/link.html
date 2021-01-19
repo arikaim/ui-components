@@ -3,9 +3,11 @@
     {% set url = 'https://github.com/' ~ package %}
     {% set icon = icon|default('github') %}
 {% endif %}
-<a {{ class|attr('class') }} href="{{ url }}" {{ target|attr('target') }} {{ popup|attr('title') }}>
-    {% if icon is not empty %}
-    <i class="icon {{ icon }} {{ icon_class }}"></i>
-    {% endif %}
-    {{ title }}
-</a>
+{% if url is not empty %}
+    <a {{ class|attr('class') }} href="{{ url }}" {{ target|attr('target') }} {{ popup|attr('title') }}>
+        {% if icon is not empty %}
+        <i class="icon {{ icon }} {{ icon_class }}"></i>
+        {% endif %}
+        {{ title }}
+    </a>
+{% endif %}

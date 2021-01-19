@@ -26,6 +26,16 @@
             <td>{{ labels.default }}</td>
             <td>{{ type.default }}</td>
         </tr>
+        {% if type.items is not empty %}
+        <tr>
+            <td>{{ labels.items }}</td>
+            <td>
+                {% for item in type.items %}
+                <span class="p-1">{{ item }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endif %}
     </tbody>
 </table>
 
