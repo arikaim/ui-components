@@ -2,8 +2,9 @@
 {% if type == 'github' %}
     {% set url = 'http://api.github.com/repos/' ~ package ~ '/releases/latest' %}
 {% elseif type == 'arikaim' %}
-    {% set url = 'http://arikaim/api/repository/package/version/' ~ package %}
+    {% set url = 'http://arikaim.com/api/repository/package/version/' ~ package %}
 {% endif %}
+{{ url }}
 {% set version = service('cache').fetch('repository.' ~ package ~ '.version') %}
 {% if version is empty %}
     {% set data = fetch(url)|jsonDecode %}
