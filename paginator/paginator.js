@@ -11,10 +11,18 @@ function Paginator() {
     this.options = {};
     this.buttons = {};
   
-    this.init = function(rowsId, component, namespace, buttons, initButtons) {      
+    this.init = function(rowsId, component, namespace, buttons, initButtons) {     
+        if (isEmpty(arguments[0]) == true) {
+            rowsId = $('.paginator').attr('rows-selector')
+        } 
+        var component = getDefaultValue(arguments[1],$('#' + rowsId).attr('component'));
+        component = (isEmpty(component) == true) ? $('.paginator').attr('component') : component;
+        
+        var namespace = getDefaultValue(arguments[2],$('#' + rowsId).attr('namespace'));
+        namespace = (isEmpty(namespace) == true) ? $('.paginator').attr('namespace') : namespace;
+
         initButtons = getDefaultValue(initButtons,true);
-        component = getDefaultValue(component,$('#' + rowsId).attr('component'));
-        namespace = getDefaultValue(namespace,$('#' + rowsId).attr('namespace'));
+              
         if (isEmpty(buttons) == true) {
             this.buttons.selector = 'paginator';
             this.buttons.component = 'components:paginator';
@@ -106,7 +114,8 @@ function Paginator() {
     };
 
     this.setOptions = function(rowsId, component, namespace) {
-        namespace = getDefaultValue(namespace,'');
+        var component = getDefaultValue(arguments[1],{});
+        var namespace = getDefaultValue(arguments[2],'');
         this.options = { 
             id: rowsId,           
             namespace: namespace       

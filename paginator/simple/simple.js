@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 arikaim.events.on('paginator.load.page',function(result) {    
     var page = parseInt(result.page);
@@ -19,3 +19,10 @@ arikaim.events.on('paginator.load.page',function(result) {
         arikaim.ui.show('.prev-page');      
     }
 },'simplePaginator');
+
+$(document).ready(function() {
+    var init = $('.paginator').attr('init');
+    if (init == true) {      
+        paginator.init();
+    }
+});
