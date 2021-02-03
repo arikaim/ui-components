@@ -10,8 +10,7 @@ function Paginator() {
     var self = this;    
     this.options = {};
     this.buttons = {};
-    this.currentPage = 1;
-
+  
     this.init = function(rowsId, component, namespace, buttons, initButtons) {      
         initButtons = getDefaultValue(initButtons,true);
         component = getDefaultValue(component,$('#' + rowsId).attr('component'));
@@ -23,9 +22,11 @@ function Paginator() {
         } else {
             this.buttons = buttons;
         }
+        var currentPage = this.resolveCurrentPage();
+       
         this.setOptions(rowsId,component,namespace);
         if (initButtons == true) {
-            this.initButtons();
+            this.initButtons(currentPage);
         }
       
         $('.page-size-menu').dropdown({
@@ -43,18 +44,33 @@ function Paginator() {
         });
     };
 
-    this.initButtons = function(page) {
-        page = (isEmpty(page) == true) ? this.currentPage : parseInt(page);
+
+    this.resolveCurrentPage = function() {
+        var el = $('#current_page');      
+        var currentPage = (el.length == true) ? el.html().trim() : null;
+        if (isEmpty(currentPage) == true) {
+            var el = $('.paginator');
+            currentPage = (el.length == true) ?  el.attr('current-page').trim() : 1;
+        }
+
+        return currentPage;
+    };
+
+    this.initButtons = function(page) {     
+        page = (isEmpty(page) == true) ? this.resolveCurrentPage() : parseInt(page);
 
         arikaim.ui.button('.page-link',function(element) {
             var page = $(element).attr('page'); 
-            return self.setPage(page,self.getOptions().namespace,function(result) {            
+            return self.setPage(page,self.getOptions().namespace,function(result) {   
+                // set current page              
+                $('#current_page').html(result.pag);
+                $('.paginator').attr('current-page',result.page);                         
                 arikaim.events.emit('paginator.load.page',result);
-                self.initButtons();                                
+                self.initButtons(result.page);                                
                 self.loadRows();  
             }); 
         });
-
+       
         $('.page-link').removeClass('active');       
         $('.page-' + page).addClass('active');    
         
@@ -192,4 +208,5 @@ function Paginator() {
 
 if (isEmpty(paginator) == true) {
     var paginator = new Paginator();
+    arikaim.events.emit('paginator.loaded',paginator);
 }
