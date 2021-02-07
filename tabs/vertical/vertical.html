@@ -1,7 +1,7 @@
 {% set menu_column = menu_column|default('one') %}
 {% set content_column = content_column|default('fifteen') %}
 
-<div class="flex min-h-full min-w-full flex-row">    
+<div class="flex flex-1 min-h-full min-w-full flex-row h-full">    
     <div class="w-1/4 flex-shrink-0">
         <div class="ui small tabular fluid stackable right pointing vertical menu {{ menu.class }}" id="{{ menu.id }}" style="flex-shrink: 0important;">
             {% for item in items %}
@@ -14,8 +14,8 @@
             {% endfor %}
         </div>
     </div>
-    <div class="flex-grow flex-shrink-1 ml-2 pl-2 pt-0">  
-        <div class="p-0 m-0 {{ content.class }}" id="{{ content.id }}">
+    <div class="flex-grow flex-shrink-1 ml-2 pl-2 pt-0 {{ content_class }}" >  
+        <div class="h-full p-0 m-0 {{ content.class }}" id="{{ content.id }}">
             {% if content.component is not empty %}          
                 {{ component(content.component, content.params) }}
             {% endif %}

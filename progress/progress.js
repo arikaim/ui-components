@@ -40,13 +40,14 @@ function TaskProgress() {
 
     this.getHandleSuccess = function(onSuccess, onError) { 
          
-        return function(result) {    
+        return function(result) {  
+         
             if (isJSON(result) == true) {
                 if (self.isProgressResponse(result) == false) {
                     callFunction(onSuccess,result);
                 } else {
                     var dataItems = JSON.parse(result);                     
-                    var lastItem = dataItems[dataItems.length - 1];            
+                    var lastItem = dataItems[dataItems.length - 1];   
                     var response = new ApiResponse(lastItem);  
                     if (response.hasError() == false) {
                         callFunction(onSuccess,response.getResult())

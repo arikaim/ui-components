@@ -11,7 +11,7 @@ function Paginator() {
     this.options = {};
     this.buttons = {};
   
-    this.init = function(rowsId, component, namespace, buttons, initButtons) {     
+    this.init = function(rowsId, component, namespace, buttons, initButtons) {   
         if (isEmpty(arguments[0]) == true) {
             rowsId = $('.paginator').attr('rows-selector')
         } 
@@ -34,7 +34,8 @@ function Paginator() {
        
         this.setOptions(rowsId,component,namespace);
         if (initButtons == true) {
-            this.initButtons(currentPage);
+            this.initButtons();
+            this.setButtonsStates(currentPage);
         }
       
         $('.page-size-menu').dropdown({
@@ -55,58 +56,71 @@ function Paginator() {
 
     this.resolveCurrentPage = function() {
         var el = $('#current_page');      
-        var currentPage = (el.length == true) ? el.html().trim() : null;
+        var currentPage = (el.length > 0) ? el.html().trim() : null;
         if (isEmpty(currentPage) == true) {
             var el = $('.paginator');
-            currentPage = (el.length == true) ?  el.attr('current-page').trim() : 1;
+            currentPage = (el.length > 0) ? el.attr('current-page').trim() : 1;
         }
 
         return currentPage;
     };
 
-    this.initButtons = function(page) {     
-        page = (isEmpty(page) == true) ? this.resolveCurrentPage() : parseInt(page);
+    this.disableButton = function(selector) {   
+        $(selector).addClass('disabled');
+        $(selector).state('disable');       
+    }
 
-        arikaim.ui.button('.page-link',function(element) {
-            var page = $(element).attr('page'); 
-            return self.setPage(page,self.getOptions().namespace,function(result) {   
-                // set current page              
-                $('#current_page').html(result.pag);
-                $('.paginator').attr('current-page',result.page);                         
-                arikaim.events.emit('paginator.load.page',result);
-                self.initButtons(result.page);                                
-                self.loadRows();  
-            }); 
-        });
-       
+    this.enableButton = function(selector) {      
+        $(selector).removeClass('disabled');
+    }
+
+    this.setButtonsStates = function(page, lastPage) {
+        page = (isEmpty(page) == true) ? this.resolveCurrentPage() : parseInt(page);
+        var lastPage = getDefaultValue(arguments[1],parseInt($('.paginator').attr('last-page')));
+
         $('.page-link').removeClass('active');       
         $('.page-' + page).addClass('active');    
         
         var fromPage = parseInt($('.paginator').attr('from-page'));
         var toPage = parseInt($('.paginator').attr('to-page'));
-        var lastPage = parseInt($('.paginator').attr('last-page'));
-
-        if (page > 1) {
-            $('.first-page').removeClass('disabled');
-            $('.prev-page').removeClass('disabled');
+    
+        if (page == 1) {                 
+            this.disableButton('.first-page');
+            this.disableButton('.prev-page');    
+        } else {           
+            this.enableButton('.first-page');
+            this.enableButton('.prev-page');              
         }
-        if (page == 1) {
-            $('.first-page').addClass('disabled');
-            $('.prev-page').addClass('disabled');
-        }     
-        if (page == lastPage) {
-            $('.next-page').addClass('disabled');
-            $('.last-page').addClass('disabled');
+           
+        if (page == lastPage) {          
+            this.disableButton('.next-page');
+            this.disableButton('.last-page');          
         } else {
-            $('.next-page').removeClass('disabled');
-            $('.last-page').removeClass('disabled');
-        }
-
+            this.enableButton('.next-page'); 
+            this.enableButton('.last-page'); 
+        } 
+        
         if (isNaN(fromPage) == false) {
-            if ((page > toPage) || (page < fromPage)) {                       
+            if ((page > toPage) || (page < fromPage)) {                 
                 this.reload();
             }
         }
+    };
+
+    this.initButtons = function() {     
+        arikaim.ui.button('.page-link',function(element) {
+            var page = $(element).attr('page'); 
+          
+            return self.setPage(page,self.getOptions().namespace,function(result) {   
+                // set current page              
+                $('#current_page').html(result.page);
+                $('.paginator').attr('current-page',result.page);                         
+                arikaim.events.emit('paginator.load.page',result);                                                      
+                self.loadRows();  
+            }); 
+        },function(result) {
+            self.setButtonsStates(result.page,result.last_page);
+        });
     };
 
     this.setParams = function(params) {

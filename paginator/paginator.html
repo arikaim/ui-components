@@ -6,7 +6,7 @@
 {% set to_page = (to_page > paginator.last_page) ? paginator.last_page : to_page %}
   
 {% if paginator.last_page > 1 %}
-    <div class="ui pagination menu {{ class }} paginator" 
+    <div class="ui menu pagination {{ class }} paginator" 
         from-page="{{ from_page }}" 
         to-page="{{ to_page }}" 
         last-page="{{ paginator.last_page }}"
