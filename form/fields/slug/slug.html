@@ -7,6 +7,7 @@
 {% set editable = editable|default(false) %}
 {% set name = name|default('slug') %}
 {% set id = id|default('slug') %}
+{% set disable_update = disable_update|default(false) %}
 <div class="field {{ class }}">   
     <label>{{ label }}</label>   
     {% if editable == true %}
@@ -16,7 +17,8 @@
             id="{{ id }}" 
             slug-source="{{ slug_source }}" 
             value="{{ value }}" 
-            editable="{{ editable }}"/>
+            editable="{{ editable }}"
+            disable-update="{{ disable_update }}"/>
     {% else %}
         <div class="ui {{ field_class }}">   
             {% if show_url == true %}         

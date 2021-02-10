@@ -3,6 +3,11 @@
 $(document).ready(function() {
     var slugSource = $('#slug').attr('slug-source');  
     var editable = $('#slug').attr('editable');
+    var disableUpdate = $('#slug').attr('disable-update');
+   
+    if (disableUpdate == true || disableUpdate == 'true') {
+        return;
+    }
     var value = $('#' + slugSource).val();
     $('#slug').html(arikaim.text.createSlug(value));  
     
