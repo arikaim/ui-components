@@ -33,7 +33,7 @@
     {% elseif property['type'] == 6 %}
         {{  component('components:form.fields.password',{
                 label: property.title,
-                class: property.required|ifthen(true,'required'),
+                class: (property.required == true) ? ' field required' : 'field',
                 name: field_name,                
                 value: property.value
             }) 

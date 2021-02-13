@@ -1,6 +1,7 @@
-{% set items = getOption('date.format.items') %}
 {% set id = id|default('date_format') %}
 {% set default = default|default(default.text) %}
+{% set config = loadConfig('date-time-format.json') %}
+{% set items = config.date %}
 
 <div class="ui basic button dropdown {{ class }}" id="date_format">   
     <i class="icon calendar"></i>

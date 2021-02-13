@@ -1,9 +1,10 @@
-{% set editable = properties.gePropertiesList(true) %}
-{% set readonly = properties.gePropertiesList(false,false) %}
+{% set readonly = properties.gePropertiesList(true) %}
+{% set editable = properties.gePropertiesList(false,false) %}
+{% set hiddens = properties.gePropertiesList(null,true) %}
 {% set groups = properties.getGroups() %}
 {% set show_readonly = show_readonly|default(true) %}
 
-{% if editable is empty and readonly is empty %}
+{% if hiddens|length == 0 and readonly|length == 0 and editable|length == 0 and groups|length == 0 %}
     <div class="ui segment">
         {{ labels.empty }}
     </div>
@@ -11,18 +12,24 @@
 
 {{ component('components:properties.items',{ items: editable }) }}
 
-{% for group in groups %}
-    {% set editable = properties.gePropertiesList(true,false,group.value) %}  
+{% for group in groups %}  
+    {% set editable = properties.gePropertiesList(true,false,group.value) %}    
     <div class="ui segment">
-        <div class="ui accordion field property-group">
-            <div class="title">
-                <i class="dropdown icon"></i>
-                {{ group.title }}
-            </div>
-            <div class="content">
+        {% if group.display_type == 'segment' %}
+            <div class="fields">
                 {{ component('components:properties.items',{ items: editable }) }}   
             </div>
-        </div>
+        {% else %}       
+            <div class="ui accordion field property-group">
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                    {{ group.title }}
+                </div>
+                <div class="content">
+                    {{ component('components:properties.items',{ items: editable }) }}   
+                </div>
+            </div>
+        {% endif %}
     </div>   
 {% endfor %}
 
@@ -42,5 +49,19 @@
             </div>
         {% endfor %}
         </div>
+        {% if hiddens is not empty %}
+            <h5>{{ labels.hidden }}</h5>
+            <div class="ui list">
+            {% for property in hiddens %}  
+                <div class="item">                   
+                    <div class="ui basic fluid label">
+                        {{ property.title }}
+                        <div class="detail">                                           
+                            {{ property.value|string }}
+                        </div>   
+                    </div>                                                     
+                </div>
+            {% endfor %}
+        {% endif %}
     </div>            
 {% endif %}
