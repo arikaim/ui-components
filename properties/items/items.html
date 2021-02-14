@@ -15,9 +15,12 @@
         </div>
     {% elseif property['type'] == 3 %}  
         {{  component('components:form.fields.checkbox',{
-                label: property.title,
+                label: property.description,
                 class: property.required|ifthen(true,'required'),
-                name: field_name,                
+                name: field_name,   
+                id: property.id,
+                rule: (property.required == true) ? 'empty' : null,
+                field_label: property.title,          
                 value: property.value
             }) 
         }}          
@@ -34,7 +37,8 @@
         {{  component('components:form.fields.password',{
                 label: property.title,
                 class: (property.required == true) ? ' field required' : 'field',
-                name: field_name,                
+                name: field_name,         
+                id: 'password',       
                 value: property.value
             }) 
         }}       

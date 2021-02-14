@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 $(document).ready(function() {
     $('.option-checkbox').checkbox({
         onChecked: function() {   

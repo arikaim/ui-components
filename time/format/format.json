@@ -1,5 +1,5 @@
 {
-    "default": {
-        "text": "Choose Time Format"
+    "labels": {
+        "default": "Choose Time Format"
     }
 }
