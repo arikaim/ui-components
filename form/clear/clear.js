@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     arikaim.ui.button('.clear-button',function(element) {
         var formId = $(element).attr('form-id');   
         if (isEmpty(formId) == false) {

@@ -4,11 +4,10 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
-"use strict";
+'use strict';
 
 function Modal() { 
-    var self = this;
-  
+   
     this.alert = function(parameters) {
         return this.confirm(parameters,null,null,'alert_dialog');
     };
@@ -69,6 +68,6 @@ function Modal() {
 
 var modal = new Modal();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     modal.init();
 });

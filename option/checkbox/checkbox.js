@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     $('.option-checkbox').checkbox({
         onChecked: function() {   
             var name = $(this).attr('name');                     

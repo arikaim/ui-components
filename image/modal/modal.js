@@ -4,11 +4,10 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
-"use strict";
+'use strict';
 
 function ImagePreviewModal() { 
-    var self = this;
-
+  
     this.loadCode = function() {
         arikaim.component.loadContent('components:image.modal',function(result) {
             $('body').append(result.html);           
@@ -52,6 +51,6 @@ function ImagePreviewModal() {
 
 var imagePreviewModal = new ImagePreviewModal();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     imagePreviewModal.loadCode();
 });

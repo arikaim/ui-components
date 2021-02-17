@@ -4,7 +4,7 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
-"use strict";
+'use strict';
 
 function Search() {
     var self = this;   
@@ -76,6 +76,4 @@ function Search() {
     };
 }
 
-if (isEmpty(search) == true) {
-    var search = new Search();
-}
+var search = new Search();

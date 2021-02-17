@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     $('.property-group').accordion();
     arikaim.ui.viewPasswordButton('.view-password','#password');
 });
