@@ -2,7 +2,7 @@
 ![version: 1.0.0](https://img.shields.io/github/release/arikaim/ui-components.svg)
 ![license: GPL3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-Arikaim CMS Html componets 
+Arikaim CMS components library for Semantic UI 
 
 
 #### Requirements   

@@ -2,7 +2,7 @@
     "name": "arikaim/ui-components",
     "description": "Arikam CMS UI components",
     "keywords": ["UI", "Arikam UI components","Arikaim"],
-    "type": "arikaim-component",
+    "type": "arikaim-components-library",
     "license": "GPL-3.0-or-later",
     "authors": [{
         "name": "Konstantin Atanasov",
@@ -13,6 +13,6 @@
         "arikaim/installer": "*"
     },
     "extra": {
-        "path": ""
+        "path": "semantic"
     }
 }
