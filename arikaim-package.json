@@ -2,7 +2,13 @@
     "title": "UI components",
     "package-type": "components",
     "name": "semantic",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "description": "Arikaim components library for Semantic UI",
-    "repository": "https://github.com/arikaim/ui-components.git"
+    "repository": "https://github.com/arikaim/ui-components.git",
+    "require": {
+        "library": [
+            "fomantic",
+            "ariakim-ui:1.3.2"
+        ]
+    }
 }
