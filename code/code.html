@@ -1,0 +1,15 @@
+{% set code_id = code_id|default('code') %}
+{% set class = class|default('p-1 border rounded') %}
+{% set language = class|default('html') %}
+<div class="{{ class }}">
+    {{  component('components:clipboard.copy',{ 
+            selector: '#' ~ code_id, 
+            type: 'element',
+            escape: true,
+            class: 'ui mini compact basic icon button' 
+        }) 
+    }}     
+    {% apply spaceless %}
+    <pre><code style="padding:1rem" class="{{ language }}" id="{{ code_id }}">{% autoescape false %}{{ content|escape }}{% endautoescape %}</code></pre>
+    {% endapply %}
+</div>

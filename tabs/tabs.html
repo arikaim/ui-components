@@ -14,7 +14,8 @@
             {% endfor %}   
             {% if menu is not empty %}     
             <div class="item right floated link {{ item_class|default('tab-item') }}" title="{{ labels.extension }}" id="menu_tab" component="system:admin.extensions.extension.details" extension="{{ menu.extension }}" >               
-                <i class="puzzle blue icon"></i>  
+                <i class="puzzle blue icon"></i> 
+                {{ labels.extension }} 
             </div>                   
             {% endif %}          
         </div>

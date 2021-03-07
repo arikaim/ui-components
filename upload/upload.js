@@ -7,12 +7,16 @@
 'use strict';
 
 function FileUpload(formId, options) {   
-    var defaultIdleLabel = "Drag & Drop file or <span class='filepond--label-action'> Browse </span>";
+    var defaultLabel = "Drag & Drop file or <span class='filepond--label-action'> Browse </span>";
     var filepondId;
 
+    this.setDefaults = function(options) {
+        $.fn.filepond.setDefaults(options);
+    };
+    
     this.registerPlugin = function(plugIn) {
         if (isEmpty(plugIn) == false && isObject(FilePond) == true) {
-            FilePond.registerPlugin(plugIn);
+            $.fn.filepond.registerPlugin(plugIn)
             return true;
         }
         return false;
@@ -28,7 +32,7 @@ function FileUpload(formId, options) {
 
     this.init = function(formId, options) {
         var maxFiles = getValue('maxFiles',options,1);
-        var idleLabel = getValue('idleLabel',options,defaultIdleLabel);
+        var label = getValue('label',options,defaultLabel);
         var acceptedFileTypes = getValue('acceptedFileTypes',options,["*"]);
         var instantUpload = getValue('instantUpload',options,false);
         var url = getValue('url',options,'/api/storage/admin/upload');
@@ -43,7 +47,7 @@ function FileUpload(formId, options) {
         $(filepondId).filepond({          
             maxFiles: maxFiles,
             allowMultiple: allowMultiple,
-            labelIdle: idleLabel,
+            labelIdle: label,
             maxFileSize: maxFileSize,
             acceptedFileTypes: acceptedFileTypes,
             instantUpload: instantUpload,
@@ -62,12 +66,16 @@ function FileUpload(formId, options) {
                     method: 'POST',
                     onload: function(response) {   
                         arikaim.ui.form.enable(formId);                    
-                        var response = new ApiResponse(response);                    
+                        var response = new ApiResponse(response);                          
                         callFunction(options.onSuccess,response.getResult());
                     },
                     onerror: function(response) {  
                         arikaim.ui.form.enable(formId);   
                         var response = new ApiResponse(response);
+                        arikaim.ui.form.enable(formId);  
+                        var submitButton = arikaim.ui.form.findSubmitButton(formId);
+                        arikaim.ui.enableButton(submitButton);
+
                         callFunction(options.onError,response.getErrors());
                     },
                     ondata: (data) => {                           
@@ -83,9 +91,8 @@ function FileUpload(formId, options) {
             }
         });     
 
-        arikaim.ui.form.onSubmit(formId,function() {           
-            arikaim.ui.form.enable(formId);  
-            $(filepondId).filepond('processFiles');
+        arikaim.ui.form.onSubmit(formId,function() {                    
+            return $(filepondId).filepond('processFiles');             
         },function(result) {
             arikaim.ui.form.enable(formId);   
         },function(error) {

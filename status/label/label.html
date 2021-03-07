@@ -1,3 +1,2 @@
-{% set labels = componentProperties('components:status') %}
-{% set label = labels.status[status] %}
+{% set label = items[status] %}
 <div class="ui label {{ label.class }} {{ class }}">{{ label.title }}</div>
