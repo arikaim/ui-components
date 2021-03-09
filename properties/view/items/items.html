@@ -1,0 +1,23 @@
+<div>
+    {% if title is not empty %}
+    <h4>{{ title }}</h4>
+    {% endif %}
+    <table class="ui very basic definition table">
+        <thead>
+            <tr>
+                <th class="four wide"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for property in items %}
+            <tr>
+                <td class="right aligned">{{ property.title }}</td>
+                <td>
+                    {{ property.value|string }}
+                </td>
+            </tr>  
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
