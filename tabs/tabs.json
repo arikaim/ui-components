@@ -1,5 +1,6 @@
 {
     "labels": {
-        "extension": "Extension"
+        "extension": "Extension",
+        "docs": "Documentation"
     }
 }

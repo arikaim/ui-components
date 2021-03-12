@@ -2,7 +2,12 @@
     <div class="ui sixteen wide column">
         <div class="ui stackable tabular menu {{ menu_class }}">      
             {% for item in items %}     
-            <div {{ item.id|attr('id') }} class="item link {{ item.active|ifthen(true,'active') }} {{ item_class|default('tab-item') }}" {{ item.title|attr("title") }} component="{{ item.component }}" {{ item.params|attr }}>
+            <div {{ item.id|attr('id') }} 
+                class="item {{ item.class }} link {{ item.active|ifthen(true,'active') }} {{ item_class|default('tab-item') }}" 
+                {{ item.title|attr("title") }} 
+                component="{{ item.component }}" 
+                {{ item.params|attr }}>
+
                 {% if item.icon is not empty %}
                 <i class="icon blue {{ item.icon }}"></i>
                 {% endif %}
@@ -11,13 +16,29 @@
                     {{ component(item.content.component,item.content.params) }}
                 {% endif %}
             </div>  
-            {% endfor %}   
-            {% if menu is not empty %}     
-            <div class="item right floated link {{ item_class|default('tab-item') }}" title="{{ labels.extension }}" id="menu_tab" component="system:admin.extensions.extension.details" extension="{{ menu.extension }}" >               
-                <i class="puzzle blue icon"></i> 
-                {{ labels.extension }} 
-            </div>                   
-            {% endif %}          
+            {% endfor %}  
+            <div class="right menu">
+                {% if help is not empty %}     
+                <div class="item link {{ item_class|default('tab-item') }}" 
+                    title="{{ labels.extension }}" 
+                    id="menu_tab" 
+                    component="{{ (help.component is empty) ? 'system:admin.help' : help.component }}" 
+                    extension="{{ help.extension }}">               
+                    <i class="info purple icon"></i> 
+                    {{ labels.docs }} 
+                </div>                   
+                {% endif %}   
+                {% if menu is not empty %}     
+                <div class="item link {{ item_class|default('tab-item') }}" 
+                    title="{{ labels.extension }}" 
+                    id="menu_tab" 
+                    component="system:admin.extensions.extension.details" 
+                    extension="{{ menu.extension }}">               
+                    <i class="puzzle purple icon"></i> 
+                    {{ labels.extension }} 
+                </div>                   
+                {% endif %}      
+            </div>    
         </div>
         <div 
             class="ui active tab segment {{ content.class|default('basic') }} h-full"
