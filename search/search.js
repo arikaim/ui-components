@@ -10,7 +10,7 @@ function Search() {
     var self = this;   
     this.options = {};
 
-    this.init = function(options, namespace, onSuccess) {
+    this.init = function(options, namespace) {
         this.options = options;
         var formId = getValue('form_id',options,"#search_form");   
         $('.search-fields').dropdown({           
@@ -65,6 +65,10 @@ function Search() {
         var event = getValue('event',this.options,'search.load');
         var params = getValue('params',this.options,null);
 
+        if (isFunction(this.options.beforeLoadResult) == true) {
+            callFunction(this.options.beforeLoadResult,this);
+        }
+        
         return arikaim.page.loadContent({
             id: self.options.id,
             component: self.options.component,
