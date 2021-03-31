@@ -7,8 +7,11 @@
 'use strict';
 
 function FileUpload(formId, options) {   
+    var self = this;
     var defaultLabel = "Drag & Drop file or <span class='filepond--label-action'> Browse </span>";
     var filepondId;
+
+    this.options = {};
 
     this.setDefaults = function(options) {
         $.fn.filepond.setDefaults(options);
@@ -40,7 +43,9 @@ function FileUpload(formId, options) {
         var maxFileSize = getValue('maxFileSize',options,"10MB");        
         var allowMultiple = getValue('allowMultiple',options,false);
         filepondId = getValue('filepondId',options,'#file');
+        var onSuccess = getValue('onSuccess',options,null);
 
+        this.options = options;
         //File type validatin plugin
         this.registerPlugin(FilePondPluginFileValidateType);
        
@@ -67,7 +72,7 @@ function FileUpload(formId, options) {
                     onload: function(response) {   
                         arikaim.ui.form.enable(formId);                    
                         var response = new ApiResponse(response);                          
-                        callFunction(options.onSuccess,response.getResult());
+                        callFunction(onSuccess,response.getResult());
                     },
                     onerror: function(response) {  
                         arikaim.ui.form.enable(formId);   
