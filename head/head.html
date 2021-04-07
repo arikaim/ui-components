@@ -74,6 +74,7 @@
     {%- endfor -%}
     {%- for file in page_files['css'] %}
         <link rel="stylesheet" type="text/css" href="{{ file.url }}">      
-    {%- endfor -%}     
-    {{- content -}}
+    {%- endfor -%}  
+    <meta name="loader" content="{{ loader }}">   
+    {{- content }}
 </head>

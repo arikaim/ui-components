@@ -21,19 +21,19 @@
         {{ selected.title }}
     {% endif %}
     <div class="ui mini vertical menu">  
-    {% if title is not empty %} 
-        <div class="ui header">{{ title }}</div>
-    {% endif %}
-    {% for item in items %}
-        <div title="{{ item.title }}" class="item {{ item.code|ifthen(selected.code,'active') }}" data-value="{{ (data_type == 'code') ? item.code : item.uuid }}">            
-            <i class="flag {{ item.country_code|lower }}"></i>
-            {% set bold_style = (item.code == selected.code) ? 'font-bold' : '' %}             
-            {% if show_native_title == true %}
-                <span class="{{ bold_style }}">{{ item.native_title }}</span>
-            {% else %}
-                <span class="{{ bold_style }}">{{ item.title }}</span>
-            {% endif %}
-        </div>      
-    {% endfor %}
+        {% if title is not empty %} 
+            <div class="ui header">{{ title }}</div>
+        {% endif %}
+        {% for item in items %}
+            <div title="{{ item.title }}" class="item" data-value="{{ (data_type == 'code') ? item.code : item.uuid }}">            
+                <i class="flag {{ item.country_code|lower }}"></i>
+                {% set bold_style = (item.code == selected.code) ? 'font-bold' : '' %}             
+                {% if show_native_title == true %}
+                    <span class="{{ bold_style }}">{{ item.native_title }}</span>
+                {% else %}
+                    <span class="{{ bold_style }}">{{ item.title }}</span>
+                {% endif %}
+            </div>      
+        {% endfor %}
     </div>
 </div>

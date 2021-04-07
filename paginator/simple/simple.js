@@ -21,7 +21,7 @@ arikaim.events.on('paginator.load.page',function(result) {
 },'simplePaginator');
 
 arikaim.component.onLoaded(function() {
-    var init = $('.paginator').attr('init');
+    var init = $('.paginator').attr('init');   
     if (init == true) {      
         paginator.init();
     }
