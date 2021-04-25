@@ -34,7 +34,7 @@
     {%- if head.favicon is defined -%}
     <link rel="icon" type="image/png" href="{{ head.favicon }}">
     {%- endif %}    
-    <meta name="viewport" content="width=device-width,initial-scale={{ initial_scale }}, minimum-scale={{ minimum_scale }}, maximum-scale={{ maximum_scale }}, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale={{ initial_scale }}, minimum-scale={{ minimum_scale }}, maximum-scale={{ maximum_scale }}, user-scalable=no, target-densityDpi=device-dpi"/>
     <!-- library files -->
     {% for file in library_files -%}        
     {%- if file.params is iterable -%}
