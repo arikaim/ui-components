@@ -1,7 +1,5 @@
 {% set id = id|default('date_format') %}
 {% set default = default|default(labels.default) %}
-{% set config = loadConfig('date-time-format.json') %}
-{% set items = config.date %}
 
 <div class="ui dropdown {{ class|default('basic button') }}" id="date_format">   
     <i class="icon calendar"></i>

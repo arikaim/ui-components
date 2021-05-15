@@ -63,14 +63,14 @@
     {% for file in component_files['js'] %}            
     {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
-    <script class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
+    <script {{ options.component_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
     {% endfor -%}
     {% for file in component_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file.url }}">
     {% endfor -%}
     <!-- page files -->
     {% for file in page_files['js'] -%}        
-        <script src="{{ file.url }}" type="text/javascript"></script>
+        <script {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
     {%- endfor -%}
     {%- for file in page_files['css'] %}
         <link rel="stylesheet" type="text/css" href="{{ file.url }}">      
