@@ -1,17 +1,26 @@
 {% set name = name|default('url') %}
-{% set id = id|default(name) %}
-{% set label = label|default(url.label) %}
-{% set placeholder = placeholder|default(url.placeholder) %}
-{% set value = value|default('') %}
-{% set relative = relative|default(true) %}
-
+{% set relative = (relative is null) ? true : relative %}
 <div class="field {{ class }}">
-    <label>{{ label }}</label>
+    <label>{{ label|default(url.label) }}</label>
     <div class="ui right labeled action input {{ class }}">
+        {% if schema.items is not empty %}
+            {{  component('semantic~form.fields.url.schema',{ 
+                    items: schema.items, 
+                    default: schema.default, 
+                    selected: schema.selected 
+                }) 
+            }}
+        {% endif %}
         {% if relative == true %}          
             <div class="ui label">{{ url('',true) }}</div>
         {% endif %}      
-        <input {{ rule|attr('rule') }} type="text" placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
+        <input 
+            {{ rule|attr('rule') }} 
+            type="text" 
+            placeholder="{{ placeholder|default(url.placeholder) }}" 
+            name="{{ name }}" 
+            id="{{ id|default(name) }}" 
+            value="{{ value|default('') }}">
         <div class="ui icon basic button clear-url" url-field="{{ id }}">
             <i class="icon eraser"></i>
         </div>
