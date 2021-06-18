@@ -1,24 +1,17 @@
-{%- set charset = head.charset|default('utf-8') -%}
-{%- set robots = head.robots|default('index,follow') -%}
-{%- set cache_control = head.cache_control|default("max-age=31536000") -%}
 {%- set initial_scale = head.initial_scale|default("1.0") -%}
 {%- set minimum_scale = head.minimum_scale|default("1.0") -%}
 {%- set maximum_scale = head.maximum_scale|default("1.0") -%}
-{%- set language = current_language|default('en') %}
-{%- set exclude = ['viewport','favicon','og','twitter'] -%}
-
-<head lang="{{ language }}">   
-    <meta name="robots" content="index, follow, all" />
+<head>   
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ head.title }}</title>
-    <meta charset="{{ charset }}">  
+    <meta charset="{{ head.charset|default('utf-8') }}">  
     <base href="{{ base_url }}"/>
-    <meta name="language" content="{{ language }}">
-    <meta name="robots" content="{{ robots }}"/>
-    <meta name="googlebot" content="{{ robots }}"/>
-    <meta name="Cache-Control" content="{{ cache_control }}"/>
+    <meta name="language" content="{{ current_language|default('en') }}">
+    <meta name="robots" content="{{ head.robots|default('index,follow,all') }}"/>
+    <meta name="googlebot" content="{{ head.robots|default('index,follow,all') }}"/>
+    <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>
     {% for key,value in head %}      
-    {%- if value is not empty and key not in exclude -%}
+    {%- if value is not empty and key not in ['viewport','favicon','og','twitter'] -%}
         <meta name="{{ key }}" content="{{ value }}"/>
     {% endif %}
     {% endfor %}
