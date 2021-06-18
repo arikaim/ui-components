@@ -1,6 +1,3 @@
-{%- set initial_scale = head.initial_scale|default("1.0") -%}
-{%- set minimum_scale = head.minimum_scale|default("1.0") -%}
-{%- set maximum_scale = head.maximum_scale|default("1.0") -%}
 <head>   
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ head.title }}</title>
@@ -27,7 +24,7 @@
     {%- if head.favicon is defined -%}
     <link rel="icon" type="image/png" href="{{ head.favicon }}">
     {%- endif %}    
-    <meta name="viewport" content="width=device-width,initial-scale={{ initial_scale }}, minimum-scale={{ minimum_scale }}, maximum-scale={{ maximum_scale }}, user-scalable=no, target-densityDpi=device-dpi"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale={{ head.minimum_scale|default("1.0") }},maximum-scale={{ head.maximum_scale|default("1.0") }}" />
     <!-- library files -->
     {% for file in library_files -%}        
     {%- if file.params is iterable -%}
