@@ -8,7 +8,7 @@
     <meta name="googlebot" content="{{ head.robots|default('index,follow,all') }}"/>
     <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>
     {% for key,value in head %}      
-    {%- if value is not empty and key not in ['viewport','favicon','og','twitter'] -%}
+    {%- if value is not empty and key not in ['viewport','favicon','og','twitter','title'] -%}
         <meta name="{{ key }}" content="{{ value }}"/>
     {% endif %}
     {% endfor %}
@@ -26,17 +26,9 @@
     {%- endif %}    
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale={{ head.minimum_scale|default("1.0") }},maximum-scale={{ head.maximum_scale|default("1.0") }}" />
     <!-- library files -->
-    {% for file in library_files -%}        
-    {%- if file.params is iterable -%}
-        {%- set params_attributes = '' -%}
-        {%- for name,value in file.params -%}
-            {%- set params_attributes = params_attributes ~ name ~ '="' ~ value ~ '"' -%}
-        {%- endfor -%}
-        {%- set params_attributes = ' ' ~ params_attributes -%}  
-    {%- endif -%}      
-    {%- set async = (file.async == true) ? ' async' : '' -%}  
+    {% for file in library_files -%}            
     {%- if file.type == "js" -%} 
-    <script id="library_{{ file.library }}" type="text/javascript" src="{{ file.file }}" {{- params_attributes|raw -}} {{- async -}} {{- file.crossorigin|attr('crossorigin') -}}></script>
+    <script id="library_{{ file.library }}" type="text/javascript" src="{{ file.file }}" {{- file.params_text|raw -}} {{ (file.async == true) ? ' async' : '' -}} {{- file.crossorigin|attr('crossorigin') -}}></script>
     {% endif %}
     {%- if file.type == "css" -%} 
     <link rel="stylesheet" type="text/css" href="{{ file.file }}">
@@ -54,17 +46,10 @@
     {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
     <script {{ options.component_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
-    {% endfor -%}
-    {% for file in component_files['css'] -%}
-    <link rel="stylesheet" type="text/css" href="{{ file.url }}">
-    {% endfor -%}
+    {% endfor -%}   
     <!-- page files -->
     {% for file in page_files['js'] -%}        
         <script {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
-    {%- endfor -%}
-    {%- for file in page_files['css'] %}
-        <link rel="stylesheet" type="text/css" href="{{ file.url }}">      
-    {%- endfor -%}  
-    <meta name="loader" content="{{ loader }}">   
+    {%- endfor -%}      
     {{- content }}
 </head>
