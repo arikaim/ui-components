@@ -30,7 +30,9 @@
     {%- if file.type == "js" -%} 
     <script id="library_{{ file.library }}" type="text/javascript" src="{{ file.file }}" {{- file.params_text|raw -}} {{ (file.async == true) ? ' async' : '' -}} {{- file.crossorigin|attr('crossorigin') -}}></script>
     {% endif %}
-    {%- if file.type == "css" -%} 
+    {%- if file.type == "css" and file.async == true -%} 
+    <link media="all" rel="preload" href="{{ file.file }}" as="style" onload="this.onload=null;this.rel='stylesheet'">    
+    {% elseif file.type == "css" %}
     <link rel="stylesheet" type="text/css" href="{{ file.file }}" media="all">
     {% endif -%}
     {%- endfor -%}      
