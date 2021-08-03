@@ -31,7 +31,7 @@
     <script id="library_{{ file.library }}" type="text/javascript" src="{{ file.file }}" {{- file.params_text|raw -}} {{ (file.async == true) ? ' async' : '' -}} {{- file.crossorigin|attr('crossorigin') -}}></script>
     {% endif %}
     {%- if file.type == "css" -%} 
-    <link rel="stylesheet" type="text/css" href="{{ file.file }}">
+    <link rel="stylesheet" type="text/css" href="{{ file.file }}" media="all">
     {% endif -%}
     {%- endfor -%}      
     <!-- template files -->
@@ -39,7 +39,7 @@
     <script src="{{ file }}" type="text/javascript"></script>
     {% endfor %}
     {%- for file in template_files['css'] -%}
-    <link rel="stylesheet" type="text/css" href="{{ file }}">      
+    <link rel="stylesheet" type="text/css" href="{{ file }}" media="all">      
     {% endfor -%}
     <!-- component files --> 
     {% for file in component_files['js'] %}            
