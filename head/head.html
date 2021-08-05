@@ -7,6 +7,8 @@
     <meta name="robots" content="{{ head.robots|default('index,follow,all') }}"/>
     <meta name="googlebot" content="{{ head.robots|default('index,follow,all') }}"/>
     <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>
+
+    {% cache 'page.head.includes' %}
     {% for key,value in head %}      
     {%- if value is not empty and key not in ['viewport','favicon','og','twitter','title'] -%}
         <meta name="{{ key }}" content="{{ value }}"/>
@@ -52,6 +54,7 @@
     <!-- page files -->
     {% for file in page_files['js'] -%}        
         <script {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
-    {%- endfor -%}      
+    {%- endfor -%}     
+    {% endcache %} 
     {{- content }}
 </head>
