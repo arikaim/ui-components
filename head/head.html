@@ -6,9 +6,7 @@
     <meta name="language" content="{{ current_language|default('en') }}">
     <meta name="robots" content="{{ head.robots|default('index,follow,all') }}"/>
     <meta name="googlebot" content="{{ head.robots|default('index,follow,all') }}"/>
-    <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>
-
-    {% cache 'page.head.includes' %}
+    <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>   
     {% for key,value in head %}      
     {%- if value is not empty and key not in ['viewport','favicon','og','twitter','title'] -%}
         <meta name="{{ key }}" content="{{ value }}"/>
@@ -26,7 +24,9 @@
     {%- if head.favicon is defined -%}
     <link rel="icon" type="image/png" href="{{ head.favicon }}">
     {%- endif %}    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale={{ head.minimum_scale|default("1.0") }},maximum-scale={{ head.maximum_scale|default("1.0") }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale={{ head.minimum_scale|default("1.0") }},maximum-scale={{ head.maximum_scale|default("1.0") }}" />   
+   
+    {% cache 'page.head.includes.' keyName 'page_component_name' %}
     <!-- library files -->
     {% for file in library_files -%}            
     {%- if file.type == "js" -%} 
@@ -56,5 +56,6 @@
         <script {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
     {%- endfor -%}     
     {% endcache %} 
+
     {{- content }}
 </head>
