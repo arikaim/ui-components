@@ -40,20 +40,19 @@
     {%- endfor -%}      
     <!-- template files -->
     {% for file in template_files['js'] -%}
-    <script src="{{ file }}" type="text/javascript"></script>
+    <script async src="{{ file }}" type="text/javascript"></script>
     {% endfor %}
     {%- for file in template_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file }}" media="all">      
     {% endfor -%}
     <!-- component files --> 
     {% for file in component_files['js'] %}            
-    {%- set async = ('async' in file.params) ? 'async' : '' -%}
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
-    <script {{ options.component_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" src="{{ file.url }}" type="text/javascript" {{ async }} {{ crossorigin -}}></script>
+    <script async {{ options.component_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" src="{{ file.url }}" type="text/javascript" {{ crossorigin -}}></script>
     {% endfor -%}   
     <!-- page files -->
     {% for file in page_files['js'] -%}        
-        <script {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
+        <script async {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
     {%- endfor -%}     
     {% endcache %} 
 
