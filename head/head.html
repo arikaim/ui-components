@@ -40,7 +40,7 @@
     {%- endfor -%}      
     <!-- template files -->
     {% for file in template_files['js'] -%}
-    <script async src="{{ file }}" type="text/javascript"></script>
+    <script {{ (file.async == true) ? ' async' : '' -}} src="{{ file }}" type="text/javascript"></script>
     {% endfor %}
     {%- for file in template_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file }}" media="all">      
