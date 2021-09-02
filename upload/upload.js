@@ -6,8 +6,7 @@
 */
 'use strict';
 
-function FileUpload(formId, options) {   
-    var self = this;
+function FileUpload(formId, options) {      
     var defaultLabel = "Drag & Drop file or <span class='filepond--label-action'> Browse </span>";
     var filepondId;
 
@@ -41,9 +40,11 @@ function FileUpload(formId, options) {
         var url = getValue('url',options,'/api/storage/admin/upload');
         var formFields = getValue('formFields',options,{});         
         var maxFileSize = getValue('maxFileSize',options,"10MB");        
-        var allowMultiple = getValue('allowMultiple',options,false);
-        filepondId = getValue('filepondId',options,'#file');
+        var allowMultiple = getValue('allowMultiple',options,false);       
         var onSuccess = getValue('onSuccess',options,null);
+        var onError = getValue('onError',options,null);
+        
+        filepondId = getValue('filepondId',options,'#file');
 
         this.options = options;
         //File type validatin plugin
@@ -81,7 +82,7 @@ function FileUpload(formId, options) {
                         var submitButton = arikaim.ui.form.findSubmitButton(formId);
                         arikaim.ui.enableButton(submitButton);
 
-                        callFunction(options.onError,response.getErrors());
+                        callFunction(onError,response.getErrors());
                     },
                     ondata: (data) => {                           
                         Object.keys(formFields).forEach(function(key) {    
@@ -96,13 +97,15 @@ function FileUpload(formId, options) {
             }
         });     
 
+        var onFormError = (isFunction(onError) == true) ? null : function(error) {
+            arikaim.ui.form.enable(formId);   
+        };
+
         arikaim.ui.form.onSubmit(formId,function() {                    
             return $(filepondId).filepond('processFiles');             
         },function(result) {
             arikaim.ui.form.enable(formId);   
-        },function(error) {
-            arikaim.ui.form.enable(formId);   
-        });
+        },onFormError);
     };
 
     this.init(formId,options);
