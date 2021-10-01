@@ -4,9 +4,11 @@
 {% set escape = escape|default(false) %}
 {% set hint = hint|default(labels.hint) %}
 <a 
-    class="link clipboard-copy {{ class }}" 
+    class="cursor-pointer link clipboard-copy {{ class }}" 
     content-selector="{{ selector }}" 
     content-type="{{ type }}" 
+    content-options="{{ options }}" 
+    focus-element="{{ focus_element }}"
     title="{{ hint }}"
     escape-content="{{ escape }}">
     {% if hide_icon != true %}

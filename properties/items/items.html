@@ -41,6 +41,20 @@
                 id: 'password',       
                 value: property.value
             }) 
+        }}  
+    {% elseif property['type'] == 8 %}
+        <div class="field {{ property.required|ifthen(true,'required') }}">  
+            <label>{{ property.title }}</label>    
+            <textarea name="{{ field_name }}" {{ rule|attr('rule') }} cols="7" rows="7">{{ property.value }}</textarea>                                       
+        </div>       
+    {% elseif property['type'] == 10 %}
+        {{  component('components:properties.items.oauth',{ 
+                update: update,
+                property: property, 
+                field_name: field_name,
+                oauth_provier: properties.getValue('oauth_provider'),
+                oauth_config: properties.getValue('oauth_config')
+            }) 
         }}       
     {% else %}
         <div class="field {{ property.required|ifthen(true,'required') }}">      

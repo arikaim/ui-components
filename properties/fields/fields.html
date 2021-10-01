@@ -10,7 +10,12 @@
     </div>
 {% endif %}
 
-{{ component('components:properties.items',{ items: editable }) }}
+{{  component('components:properties.items',{ 
+        update: update, 
+        items: editable, 
+        properties: properties 
+    }) 
+}}
 
 {% for group in groups %}  
     {% set editable = properties.gePropertiesList(false,false,group.value) %}    
