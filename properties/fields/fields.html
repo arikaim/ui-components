@@ -1,6 +1,6 @@
-{% set readonly = properties.gePropertiesList(true,false) %}
-{% set editable = properties.gePropertiesList(false,false) %}
-{% set hiddens = properties.gePropertiesList(false,true) %}
+{% set readonly = properties.getPropertiesList(true,false) %}
+{% set editable = properties.getPropertiesList(false,false) %}
+{% set hiddens = properties.getPropertiesList(false,true) %}
 {% set groups = properties.getGroups() %}
 {% set show_readonly = show_readonly|default(true) %}
 
@@ -18,7 +18,7 @@
 }}
 
 {% for group in groups %}  
-    {% set editable = properties.gePropertiesList(false,false,group.value) %}    
+    {% set editable = properties.getPropertiesList(false,false,group.value) %}    
     <div class="ui segment">
         {% if group.display_type == 'segment' %}
             <div class="fields">
