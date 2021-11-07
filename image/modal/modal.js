@@ -9,7 +9,7 @@
 function ImagePreviewModal() { 
   
     this.loadCode = function() {
-        arikaim.component.loadContent('components:image.modal',function(result) {
+        arikaim.component.loadContent('semantic~image.modal',function(result) {
             $('body').append(result.html);           
         });       
     };

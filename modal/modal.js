@@ -60,7 +60,7 @@ function Modal() {
     }
 
     this.init = function() {
-        arikaim.component.loadContent('components:modal',function(result) {
+        arikaim.component.loadContent('semantic~modal',function(result) {
             $('body').append(result.html);
         }); 
     };

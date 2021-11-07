@@ -25,7 +25,7 @@ function Paginator() {
               
         if (isEmpty(buttons) == true) {
             this.buttons.selector = 'paginator';
-            this.buttons.component = 'components:paginator';
+            this.buttons.component = 'semantic~paginator';
             this.buttons.params = {};
         } else {
             this.buttons = buttons;

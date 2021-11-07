@@ -8,7 +8,7 @@
                     {{ item.title }}  
                 </div>           
             </div>
-            {{ component('components:list.folder',{ items: item.items, icon: icon, class: class }) }}
+            {{ component('semantic~list.folder',{ items: item.items, icon: icon, class: class }) }}
         {% else %}
             <div class="item">
                 <i class="icon {{ icon }}"></i>

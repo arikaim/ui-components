@@ -5,7 +5,7 @@
     <div class="ui {{ column_class }} column">      
         <div class="ui {{ panel_class }}">
             {% if show_title == true and title is not empty %}
-                {{ component('components:segment-title',{ title: title.content, icon: title.icon }) }}
+                {{ component('semantic~segment-title',{ title: title.content, icon: title.icon }) }}
             {% endif %}
             {{ content }}
         </div>

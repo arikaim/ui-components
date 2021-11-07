@@ -9,22 +9,22 @@
         {{ labels.empty }}
     </div>
 {% else %}
-    {{ component('components:properties.view.items',{ items: editable, table_class: table_class }) }}  
+    {{ component('semantic~properties.view.items',{ items: editable, table_class: table_class }) }}  
 
     {% for group in groups %}  
         {% set editable = properties.getPropertiesList(false,false,group.value) %}   
         <div class="ui segment">
             <h4>{{ group.title }}</h4>
-            {{ component('components:properties.view.items',{ items: editable, table_class: table_class }) }}  
+            {{ component('semantic~properties.view.items',{ items: editable, table_class: table_class }) }}  
         </div>   
     {% endfor %}
 
     {% if readonly is not empty %}
-        {{ component('components:properties.view.items',{ items: hiddens, title: labels.readonly, table_class: table_class }) }}  
+        {{ component('semantic~properties.view.items',{ items: hiddens, title: labels.readonly, table_class: table_class }) }}  
     {% endif %}
 
     {% if hiddens is not empty %}
-        {{ component('components:properties.view.items',{ items: hiddens, title: labels.hidden, table_class: table_class }) }}           
+        {{ component('semantic~properties.view.items',{ items: hiddens, title: labels.hidden, table_class: table_class }) }}           
     {% endif %}
 
 {% endif %}

@@ -14,7 +14,7 @@
             </div>                
         </div>
     {% elseif property['type'] == 3 %}  
-        {{  component('components:form.fields.checkbox',{
+        {{  component('semantic~form.fields.checkbox',{
                 label: property.description,
                 class: property.required|ifthen(true,'required'),
                 name: field_name,   
@@ -34,7 +34,7 @@
             </select>                
         </div>
     {% elseif property['type'] == 6 %}
-        {{  component('components:form.fields.password',{
+        {{  component('semantic~form.fields.password',{
                 label: property.title,
                 class: (property.required == true) ? ' field required' : 'field',
                 name: field_name,         
@@ -48,14 +48,25 @@
             <textarea name="{{ field_name }}" {{ rule|attr('rule') }} cols="7" rows="7">{{ property.value }}</textarea>                                       
         </div>       
     {% elseif property['type'] == 10 %}
-        {{  component('components:properties.items.oauth',{ 
+        {{  component('semantic~properties.items.oauth',{ 
                 update: update,
                 property: property, 
                 field_name: field_name,
                 oauth_provier: properties.getValue('oauth_provider'),
                 oauth_config: properties.getValue('oauth_config')
             }) 
-        }}       
+        }} 
+    {% elseif property['type'] == 11 %}
+        <div class="field {{ property.required|ifthen(true,'required') }}">  
+            <label>{{ property.title }}</label>
+            {{  component('semantic~language.dropdown',{                
+                    name: field_name,
+                    selected: property.value,
+                    class: 'property-language-dropdown selection',
+                    id: 'property_language_dropdown'
+                }) 
+            }}      
+        </div>
     {% else %}
         <div class="field {{ property.required|ifthen(true,'required') }}">      
             <label>{{ property.title }}</label>                 

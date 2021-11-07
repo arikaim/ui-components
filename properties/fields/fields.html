@@ -10,7 +10,7 @@
     </div>
 {% endif %}
 
-{{  component('components:properties.items',{ 
+{{  component('semantic~properties.items',{ 
         update: update, 
         items: editable, 
         properties: properties 
@@ -22,7 +22,7 @@
     <div class="ui segment">
         {% if group.display_type == 'segment' %}
             <div class="fields">
-                {{ component('components:properties.items',{ items: editable }) }}   
+                {{ component('semantic~properties.items',{ items: editable }) }}   
             </div>
         {% else %}       
             <div class="ui accordion field property-group">
@@ -31,7 +31,7 @@
                     {{ group.title }}
                 </div>
                 <div class="content">
-                    {{ component('components:properties.items',{ items: editable }) }}   
+                    {{ component('semantic~properties.items',{ items: editable }) }}   
                 </div>
             </div>
         {% endif %}

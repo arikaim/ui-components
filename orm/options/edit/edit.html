@@ -4,9 +4,9 @@
     <form class="ui form {{ class }}" id="{{ form_id }}">   
         <input type="hidden" value="{{ id }}" name="id">
         {% for option in options %}   
-            {{ component('components:orm.options.edit.field',{ option: option }) }}              
+            {{ component('semantic~orm.options.edit.field',{ option: option }) }}              
         {% endfor %}
-        {{ component('components:form.footer') }}
+        {{ component('semantic~form.footer') }}
     </form>
 {% else %}
 <div>

@@ -4,7 +4,7 @@
 {% set trim_space = (trim_space is null) ? true : trim_space %}
 <div class="{{ class }}">   
     {% if hide_copy != true %}
-        {{  component('components:clipboard.copy',{ 
+        {{  component('semantic~clipboard.copy',{ 
                 selector: '#' ~ code_id, 
                 type: 'element',
                 escape: true,

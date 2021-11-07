@@ -11,7 +11,7 @@
         </a>    
     {% endif %}
     {% if show_clear_button == true %}
-        {{ component('components:form.clear',{ form_id: form_id, class: clear_button_class }) }}
+        {{ component('semantic~form.clear',{ form_id: form_id, class: clear_button_class }) }}
     {% endif %}
     <div class="ui error message errors hidden mt-2 {{ error_message_class }}"></div> 
     <div class="ui success message hidden mt-2 {{ success_message_class }}" id="message"></div>  
