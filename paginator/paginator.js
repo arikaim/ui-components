@@ -161,7 +161,7 @@ function Paginator() {
         var deferred = new $.Deferred();
 
         pageSize = (isEmpty(pageSize) == true) ? 1 : pageSize;
-        namespace = getDefaultValue(namespace,"");
+        namespace = getDefaultValue(namespace,'');
         var data = { 
             page_size: pageSize,
             namespace: namespace 

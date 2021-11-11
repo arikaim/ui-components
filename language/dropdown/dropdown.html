@@ -10,7 +10,7 @@
 {% set language = createModel('Language') %}
 {% set items = (active_only == true) ? language.where('status',1).orderBy('position').get() : language.orderBy('position').get() %}
 
-<div class="ui dropdown {{ class }}" id="{{ id }}">      
+<div class="ui dropdown show-popup {{ class }}" id="{{ id }}" {{ tooltip|attr('data-content') }}>      
     {% if name is not empty %}           
         <div class="default text">{{ label.default }}</div>
         <input name="{{ name }}" type="hidden" value="{{ selected.code }}">
