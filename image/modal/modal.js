@@ -51,6 +51,6 @@ function ImagePreviewModal() {
 
 var imagePreviewModal = new ImagePreviewModal();
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     imagePreviewModal.loadCode();
 });

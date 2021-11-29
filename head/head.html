@@ -48,11 +48,11 @@
     <!-- component files --> 
     {% for file in component_files['js'] %}            
     {%- set crossorigin = ('crossorigin' in file.params) ? 'crossorigin="anonymous"' : '' -%}
-    <script async {{ options.component_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" src="{{ file.url }}" type="text/javascript" {{ crossorigin -}}></script>
+    <script async {{ options.component_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" component-id="{{ file.component_id }}" src="{{ file.url }}" type="text/javascript" {{ crossorigin -}}></script>
     {% endfor -%}   
     <!-- page files -->
     {% for file in page_files['js'] -%}        
-        <script async {{ options.page_files }} src="{{ file.url }}" type="text/javascript"></script>
+        <script async {{ options.page_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" component-id="{{ file.component_id }}" src="{{ file.url }}" type="text/javascript"></script>
     {%- endfor -%}     
     {% endcache %} 
 

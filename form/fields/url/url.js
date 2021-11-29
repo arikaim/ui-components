@@ -1,6 +1,6 @@
 'use stric';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     $('.http-schema-dropdown').dropdown({});
 
     arikaim.ui.button('.clear-url',function(element) {

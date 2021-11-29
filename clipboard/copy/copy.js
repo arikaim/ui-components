@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     $('.clipboard-copy').on('click',function() {
         var type = $(this).attr('content-type');
         var selector = $(this).attr('content-selector');

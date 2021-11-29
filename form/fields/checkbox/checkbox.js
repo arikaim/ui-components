@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     $('.checkbox-field').checkbox({
         onChecked: function() {   
            var fieldId = $(this).attr('data-field-id');  

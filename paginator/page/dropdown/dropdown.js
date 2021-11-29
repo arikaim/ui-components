@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     $('.page-go-menu').dropdown({
         onChange: function(value) { 
             var namespace = $(this).attr('namespace');

@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
 
     arikaim.events.on('oauth.success',function(result) {
         drivers.reloadConfig();

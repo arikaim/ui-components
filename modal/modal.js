@@ -68,6 +68,6 @@ function Modal() {
 
 var modal = new Modal();
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     modal.init();
 });

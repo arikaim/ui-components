@@ -20,7 +20,7 @@ arikaim.events.on('paginator.load.page',function(result) {
     }
 },'simplePaginator');
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     var init = $('.paginator').attr('init');   
     if (init == true) {      
         paginator.init();

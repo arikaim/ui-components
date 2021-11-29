@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     $('.full-screen').on('click',function() {
         var targetId = $(this).attr('iframe-id');
         var el = $('#' + targetId);

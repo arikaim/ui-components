@@ -1,6 +1,6 @@
 'use strict';
 
-arikaim.component.onLoaded(function() {
+arikaim.component.onLoaded(function(component) {
     var slugSource = $('#slug').attr('slug-source');  
     var editable = $('#slug').attr('editable');
     var disableUpdate = $('#slug').attr('disable-update');
