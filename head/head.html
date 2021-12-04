@@ -40,7 +40,11 @@
     {%- endfor -%}      
     <!-- template files -->
     {% for file in template_files['js'] -%}
+    {% if file is iterable -%}
+    <script class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" component-id="{{ file.component_id }}" src="{{ file.url }}" type="text/javascript"></script>
+    {% else -%}
     <script {{ (file.async == true) ? ' async' : '' -}} src="{{ file }}" type="text/javascript"></script>
+    {% endif -%}
     {% endfor %}
     {%- for file in template_files['css'] -%}
     <link rel="stylesheet" type="text/css" href="{{ file }}" media="all">      
