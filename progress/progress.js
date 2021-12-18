@@ -8,6 +8,8 @@
 
 function TaskProgress() {
     var self = this;
+    
+    this.responseLen = 0;
 
     this.post = function(url, data, onProgress, onSuccess, onError) {
         return this.request('POST',url,data,onProgress,onSuccess,onError);    
@@ -22,6 +24,7 @@ function TaskProgress() {
     };
 
     this.request = function(method, url, data, onProgress, onSuccess, onError) {
+        this.responseLen = 0;
 
         var handleProgress = (isEmpty(onProgress) == false) ? this.getHandleProgress(onProgress,onSuccess,onError) : null
         var handleSuccess = (isEmpty(onSuccess) == false) ? this.getHandleSuccess(onSuccess,onError) : null
@@ -62,19 +65,23 @@ function TaskProgress() {
     this.getHandleProgress = function(onProgress, onSuccess, onError) { 
          
         return function(event) {
-            var data = event.currentTarget.responseText; 
-            if (isEmpty(data) == true) {
+            if (isEmpty(event.currentTarget.responseText) == true) {            
                 return;
             }
-            data = data.trim();            
-            if (data.charAt(data.length - 1) != ']') {
-                data = data + ']';
+                    
+            var data = event.currentTarget.responseText.substr(self.responseLen);
+            if (data.charAt(data.length - 1) == ',') {
+                data = data.slice(0,-1);
             }
-    
+      
+            data = '[' + data + ']';
+            self.responseLen = event.currentTarget.responseText.length;
+                     
             if (isJSON(data) == true) {
-                var dataItems = JSON.parse(data);                     
-                var lastItem = dataItems[dataItems.length - 1];
-            
+                var dataItems = JSON.parse(data);   
+                console.log(dataItems);
+
+                var lastItem = dataItems[dataItems.length - 1];            
                 var response = new ApiResponse(lastItem);  
                 if (response.hasError() == true) {                                                 
                     callFunction(onError,response.getErrors());                        
