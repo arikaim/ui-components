@@ -79,8 +79,6 @@ function TaskProgress() {
                      
             if (isJSON(data) == true) {
                 var dataItems = JSON.parse(data);   
-                console.log(dataItems);
-
                 var lastItem = dataItems[dataItems.length - 1];            
                 var response = new ApiResponse(lastItem);  
                 if (response.hasError() == true) {                                                 
