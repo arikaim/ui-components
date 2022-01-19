@@ -59,6 +59,9 @@
         <script async {{ options.page_files }} class="component-file" component-type="{{ file.component_type }}" component-name="{{ file.component_name }}" component-id="{{ file.component_id }}" src="{{ file.url }}" type="text/javascript"></script>
     {%- endfor -%}     
     {% endcache %} 
-
+    <!-- component instances -->
+    {% for item in component_instances -%}
+    <meta class="component-instance" component-name="{{ item.name }}" component-type="{{ item.type }}" component-id="{{ item.id }}">
+    {% endfor -%}
     {{- content }}
 </head>
