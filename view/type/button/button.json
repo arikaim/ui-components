@@ -4,7 +4,7 @@
         "table": {
             "value": "table",
             "title": "Table",
-            "icon": "list alternate outline"
+            "icon": "list"
         },      
         "grid": {
             "value": "grid",

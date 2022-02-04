@@ -37,7 +37,7 @@ function ViewTypeButton() {
             viewType = self.switchViewType(viewType);
             
             self.setViewType(viewType,namespace,function(result) {
-                var iconClass = (result.view == 'grid') ? 'icon view-type-icon th': 'icon view-type-icon list alternate outline';               
+                var iconClass = (result.view == 'grid') ? 'icon view-type-icon th' : 'icon view-type-icon list';               
                 $('.view-type').attr('data-value',result.view);
                 $('.view-type-icon').attr('class',iconClass);    
                 callFunction(onSuccess,result.view);          

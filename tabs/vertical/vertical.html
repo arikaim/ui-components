@@ -3,7 +3,10 @@
 
 <div class="flex flex-1 min-w-full flex-row">    
     <div class="flex-shrink-0">
-        <div class="ui small tabular fluid stackable right pointing vertical menu {{ menu.class }}" id="{{ menu.id }}" style="flex-shrink: 0important;">
+        <div
+            class="ui small tabular fluid stackable right pointing vertical menu {{ menu.class }}" 
+            id="{{ menu.id }}" 
+            style="flex-shrink: 0!important;">
             {% for item in items %}
             <div class="item {{ item.active|ifthen(true,'active') }} link {{ item_class }}" component="{{ item.component }}" {{ item.id|attr('id') }} {{ item.params|attr }}>
                 {% if item.icon is not empty %}
