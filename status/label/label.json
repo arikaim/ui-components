@@ -29,6 +29,11 @@
             "index": 5,
             "title": "Suspended",
             "class": "orange mini"
-        }  
+        },
+        {
+            "index": 6,
+            "title": "Cancelled",
+            "class": "orange mini"
+        } 
     ]
 }
