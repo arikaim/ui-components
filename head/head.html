@@ -4,8 +4,8 @@
     <meta charset="{{ head.charset|default('utf-8') }}">  
     <base href="{{ base_url }}"/>
     <meta name="language" content="{{ current_language|default('en') }}">
-    <meta name="robots" content="{{ head.robots|default('index,follow,all') }}"/>
-    <meta name="googlebot" content="{{ head.robots|default('index,follow,all') }}"/>
+    <meta name="robots" content="{{ head.robots|default(robots)|default('index,follow,all') }}"/>
+    <meta name="googlebot" content="{{ head.robots|default(robots)|default('index,follow,all') }}"/>
     <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>   
     {% for key,value in head %}      
     {%- if value is not empty and key not in ['viewport','favicon','og','twitter','title'] -%}
