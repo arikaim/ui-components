@@ -8,7 +8,7 @@
     <meta name="googlebot" content="{{ head.robots|default(robots)|default('index,follow,all') }}"/>
     <meta name="Cache-Control" content="{{ head.cache_control|default("max-age=31536000") }}"/>   
     {% for key,value in head %}      
-    {%- if value is not empty and key not in ['viewport','favicon','og','twitter','title'] -%}
+    {%- if value is not empty and key not in ['viewport','favicon','og','twitter','title','code'] -%}
         <meta name="{{ key }}" content="{{ value }}"/>
     {% endif %}
     {% endfor %}
@@ -63,5 +63,7 @@
     {% for item in component_instances -%}
     <meta class="component-instance" component-name="{{ item.name }}" component-type="{{ item.type }}" component-id="{{ item.id }}">
     {% endfor -%}
+    <!-- custom code -->
+    {{ head.code }}
     {{- content }}
 </head>
