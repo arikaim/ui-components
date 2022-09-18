@@ -1,7 +1,7 @@
 {% set name = name|default('price') %}
 {% set id = id|default(name) %}
 {% set label = label|default(price.label) %}
-{% set value = (value is not empty) ? value|numberFormat : value %}
+{% set value = value|default(0) %}
 
 <div class="field {{ class }}">
     <label>{{ label }}</label>
@@ -11,7 +11,13 @@
         {% else %}
             <div class="ui label">{{ currency_code }}</div>
         {% endif %}      
-        <input {{ rule|attr('rule') }} type="text" placeholder="{{ placeholder }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
+        <input 
+            {{ rule|attr('rule') }} 
+            type="text" 
+            placeholder="{{ placeholder }}" 
+            name="{{ name }}" 
+            id="{{ id }}" 
+            value="{{ value|numberFormat }}">
         <div class="ui icon basic button clear-price" price-field="{{ id }}">
             <i class="icon eraser"></i>
         </div>
