@@ -10,8 +10,7 @@
         </div>
         {% if close_button|default(true) == true %}                
             <button 
-                content-id="{{ content_id|default('details_content') }}"
-                class="ui compact mini icon button right aligned panel-close-button {{ button_class }}">
+                class="ui compact mini icon button right aligned panel-close-button {{ close_button_class }}">
                 <i class="icon close"></i>
             </button>
         {% endif %}
