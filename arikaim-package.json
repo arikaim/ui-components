@@ -2,7 +2,7 @@
     "title": "UI components",
     "package-type": "components",
     "name": "semantic",
-    "version": "1.7.20",
+    "version": "1.7.21",
     "description": "Arikaim components library for Semantic UI.",
     "repository": "https://github.com/arikaim/ui-components.git",
     "require": {
