@@ -74,8 +74,17 @@
         </label>   
         <div 
             id="key_field_{{ property.group }}_{{ property.name }}"
-            class="flex flex-row items-center p-1 border border-solid rounded-lg border-gray-300">          
-            {{ component('semantic~properties.items.key',{ property: property }) }}
+            class="flex flex-row items-center p-1 border border-solid rounded-lg border-gray-300">    
+            {% if property.value is empty %}    
+                {{  component('semantic~properties.items.key.edit',{ 
+                        group: property.group,
+                        field_name: property.name,
+                        preview: '...'
+                    }) 
+                }}
+            {% else %}  
+                {{ component('semantic~properties.items.key',{ property: property }) }}
+            {% endif %}
         </div>
     </div> 
     {% else %}
