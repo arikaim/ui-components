@@ -1,24 +1,31 @@
-{% set id = id|default('meta_tags_form') %}
-{% set language = language|default(current_language) %}
-{% set title = (translation is not empty) ? translation.meta_title : title %}
-{% set description = (translation is not empty) ? translation.meta_description : description %}
-{% set keywords = (translation is not empty) ? translation.meta_keywords : keywords %}
-<form class="ui form {{ class }}" id="{{ id }}">  
+<form class="ui form {{ class }}" id="meta_tags_form">  
     {% if uuid is not empty %}
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">  
-    {% endif %}
-    <input type="hidden" name="language" id="language" value="{{ language }}">    
+    {% endif %}    
     <div class="field">
         <label>{{ fields.title.label }}</label>
-        <input type="text" name="meta_title" id="meta_title" {{ title.placeholder|attr('placeholder') }} value="{{ title }}">  
+        <input 
+            type="text" 
+            name="meta_title" 
+            id="meta_title" 
+            {{ title.placeholder|attr('placeholder') }} 
+            value="{{ model.meta_title }}">  
     </div> 
     <div class="field">
         <label>{{ fields.description.label }}</label>
-        <textarea rows="7" cols="7" name="meta_description" id="meta_description" {{ fields.description.placeholder|attr('placeholder') }}>{{ description }}</textarea>
+        <textarea 
+            rows="7" cols="7" 
+            name="meta_description" 
+            id="meta_description" 
+            {{ fields.description.placeholder|attr('placeholder') }}>{{ model.meta_description }}</textarea>
     </div> 
     <div class="field">
         <label>{{ fields.keywords.label }}</label>
-        <textarea rows="7" cols="7" name="meta_keywords" id="meta_keywords" {{ fields.keywords.placeholder|attr('placeholder') }}>{{ keywords }}</textarea>
+        <textarea 
+            rows="7" cols="7" 
+            name="meta_keywords" 
+            id="meta_keywords" 
+            {{ fields.keywords.placeholder|attr('placeholder') }}>{{ model.meta_keywords }}</textarea>
     </div> 
     {{ component('semantic~form.footer') }}   
 </form>
