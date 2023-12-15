@@ -18,6 +18,13 @@
         "text-area",
         "group",
         "oauth",
-        "language-dropdown"
+        "language-dropdown",
+        "image",
+        "key",
+        "price",
+        "file",
+        "date",
+        "time",
+        "time-interval"
     ]
 }
