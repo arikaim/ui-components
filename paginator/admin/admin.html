@@ -16,6 +16,7 @@
     to-page="{{ to_page }}" 
     current-page="{{ paginator.current_page }}"
     class="ui menu pagination {{ class }}">
+    {% if to_page > 1 %}
     <btn 
         class="item link page-link first-page
         {{ button_class|default('btn-sm') }} 
@@ -53,5 +54,6 @@
         {{ (paginator.current_page == paginator.last_page) ? 'btn-active' : '' }}"
         page="{{ paginator.last_page }}">
         <i class="ui icon angle double right"></i>
-    </btn>   
+    </btn>  
+    {% endif %} 
 </div>

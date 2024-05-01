@@ -1,3 +1,4 @@
+{% set title_column = title_column|default('title') %}
 <form class="ui form {{ class }}" id="meta_tags_form">  
     {% if uuid is not empty %}
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">  
@@ -9,7 +10,7 @@
             name="meta_title" 
             id="meta_title" 
             {{ title.placeholder|attr('placeholder') }} 
-            value="{{ model.meta_title }}">  
+            value="{{ model.meta_title|default(model[title_column]) }}">  
     </div> 
     <div class="field">
         <label>{{ fields.description.label }}</label>
