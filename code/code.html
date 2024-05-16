@@ -1,6 +1,11 @@
 {% set code_id = code_id|default('code') %}
 {% set language = language|default('html') %}
 {% set trim_space = (trim_space is null) ? true : trim_space %}
+{% if escape_content == true %}
+    {% autoescape false %}
+        {% set content = content|escape %}
+    {% endautoescape %}
+{% endif %}
 <div class="{{ class|default('p-1 border rounded') }}">   
     {% if hide_copy != true %}  
         {{  component('semantic~clipboard.copy',{ 
@@ -11,11 +16,12 @@
             }) 
         }}         
     {% endif %}
+
     {% if trim_space == true %}
-    {% apply spaceless %}
-    <pre><code class="{{ language }}" id="{{ code_id }}">{% autoescape false %}{{ content|escape }}{% endautoescape %}</code></pre>
+        {% apply spaceless %}
+        <pre><code class="{{ language }}" id="{{ code_id }}">{{ content }}</code></pre>
     {% endapply %}
     {% else %}
-    <pre><code class="{{ language }}" id="{{ code_id }}">{% autoescape false %}{{ content|escape }}{% endautoescape %}</code></pre>
+        <pre><code class="{{ language }}" id="{{ code_id }}">{{ content }}</code></pre>
     {% endif %}
 </div>

@@ -16,6 +16,9 @@
                 <th>
                     {{ labels.required }}
                 </th>
+                <th>
+                    {{ labels.default }}
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +27,17 @@
                 <td >{{ key }}</td>
                 <td >{{ property.title }}</td>
                 <td>
-                    {{ type[property.type] }}
+                    {% if property.type is string %}
+                        {{ property.type }}                        
+                    {% else %}
+                        {{ type[property.type] }}
+                    {% endif %}
                 </td>
                 <td>
                     {{ (property.required == true) ? 'yes' : 'no' }}
+                </td>
+                <td>
+                    {{ property.default }}
                 </td>
             </tr>  
             {% endfor %}
