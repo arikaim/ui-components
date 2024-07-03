@@ -18,7 +18,20 @@
                     {{ key }}
                 </td>
                 <td class="break-all">
-                    {{ value }}
+                    {% if value is iterable %}
+                        <div class="ui list"> 
+                        {% for key, param in value %}
+                            <div class="item">
+                                <div class="ui basic mini label px-1 font-bold">
+                                    {{ key }}
+                                </div>
+                                {{ param }}
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ value }}
+                    {% endif %}
                 </td>
             </tr>           
             {% endfor %}                                                          
