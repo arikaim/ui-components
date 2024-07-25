@@ -4,6 +4,11 @@
     {% else %}
         {% set field_name = property.name %} 
     {% endif %}    
+    
+    {% if field_group is not empty %}
+        {% set field_name = field_group ~ '[' ~ field_name ~ ']' %}
+    {% endif %}
+
     {% set rule = (property.required == true) ? 'empty' : '' %}    
     {% if property['type'] == 7 %}
         <div class="field {{ property.required|ifthen(true,'required') }}">      
