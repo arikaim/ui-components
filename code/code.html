@@ -17,11 +17,9 @@
         }}         
     {% endif %}
 
-    {% if trim_space == true %}
-        {% apply spaceless %}
-        <pre><code class="{{ language }}" id="{{ code_id }}">{{ content }}</code></pre>
-    {% endapply %}
-    {% else %}
+    {%- if trim_space == true -%}
+        <pre><code class="{{ language }}" id="{{ code_id }}">{{- content -}}</code></pre>   
+    {%- else -%}
         <pre><code class="{{ language }}" id="{{ code_id }}">{{ content }}</code></pre>
     {% endif %}
 </div>

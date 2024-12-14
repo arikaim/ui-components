@@ -18,6 +18,11 @@ arikaim.component.onLoaded(function(component) {
             value = value.trim();
         }
 
+        if (escape == true && isEmpty(value) == false) {
+            var doc = new DOMParser().parseFromString(value,'text/html');
+            value = doc.documentElement.textContent;
+        }
+
         if (isObject(navigator.clipboard) == true) {
             navigator.clipboard.writeText(value).then(function() {
                 $(focusElement).show();  
@@ -30,11 +35,7 @@ arikaim.component.onLoaded(function(component) {
         } else {           
             var $input = $('<input>');
             $('body').append($input);
-            if (escape == true && isEmpty(value) == false) {
-                var doc = new DOMParser().parseFromString(value,'text/html');
-                value = doc.documentElement.textContent;
-            }
-           
+    
             $input.val(value);
             $input.focus();
             $input.select();
