@@ -1,5 +1,7 @@
 
-{% set selected = selected|default(today()|dateFormat('m')) %}
+{% set from_year = from_year|default(currentYear() - 4) %}
+{% set to_year = to_year|default(currentYear()) %}
+{% set selected = selected|default(currentYear()) %}
 <select
         id="{{ component_id }}"
         selected="{{ selected }}"
@@ -13,11 +15,11 @@
         </option>
     {% endif %}
    
-    {% for key, title in months %}
+    {% for year in range(from_year,to_year) %}
         <option 
-            {{ (key == selected) ? 'selected' : '' }}          
-            value="{{ key }}">
-            {{ title }} 
+            {{ (year == selected) ? 'selected' : '' }}          
+            value="{{ year }}">
+            {{ year }} 
         </option>
     {% endfor %}
 </select>
