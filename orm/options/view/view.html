@@ -1,0 +1,27 @@
+{% set options = createModel(model,extension).getOptions(id,only_types) %}
+{% if options.toArray()|length > 0  %}
+<table class="ui very basic definition table"> 
+    <thead>
+        <tr>
+            <th class="six wide">{{ labels.key }}</th>
+            <th>{{ labels.value }}</th>                    
+        </tr>
+    </thead>           
+    <tbody>                       
+        {% for item in options.toArray() %}
+        <tr>
+            <td class="right aligned">
+                {{ item.key }}
+            </td>
+            <td class="break-all">              
+                {{ item.value }}               
+            </td>
+        </tr>           
+        {% endfor %}                                                          
+    </tbody>
+</table> 
+{% else %}
+<div>
+    {{ labels.empty }}
+</div>
+{% endif %}

@@ -6,19 +6,28 @@ arikaim.component.onLoaded(function(component) {
         if (component.get('show_parent') != true) {
             $(component.getElement()).parent().hide();     
         }
-        $(component.getElement()).remove();             
+        component.set('close',true);
+        component.remove();                
     };
     
     component.remove = function() {
         $(component.getElement()).remove();    
     }
 
+    component.show = function() {
+        component.set('show',true);
+        $(component.getElement()).parent().show();
+    }
+
     component.init = function() {
-        var closeButtons = $(component.getElement()).find('.panel-close-button');
-        arikaim.ui.button(closeButtons,function() { 
+        arikaim.ui.button($(component.getElement()).find('.panel-close-button'),
+        function() { 
             component.close();
         });
-        $(component.getElement()).parent().show();
+        
+        if (component.get('hide') != true) {     
+            component.show();
+        }
     };
     
     component.init();
